@@ -6,6 +6,6 @@ interface Props {
 
 export class NotFound extends React.Component<Props> {
     render() {
-        return <></>
+        return <>NotFound</>
     }
 }

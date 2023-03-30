@@ -1,24 +1,28 @@
-import React from "react"
-import { Routes, Route, BrowserRouter } from "react-router-dom"
-import { Header, InnerWrap } from "./components"
+import * as React from "react"
+import { mui } from "./assets"
+import { Routes, Route } from "react-router-dom"
+import { ContentWrap, Header } from "./components"
 import { Catalog, Details, Home, NotFound, Profile } from "./pages"
+
+const Wrapper = mui.styled(mui.Box)(({ theme }) => ({
+    minHeight: "100vh",
+    backgroundColor: theme.palette.grey[700],
+}))
 
 function App() {
     return (
-        <div className="App">
+        <Wrapper data-testid="library-app">
             <Header />
-            <BrowserRouter>
-                <InnerWrap>
-                    <Routes>
-                        <Route path="/" element={<Home />}></Route>
-                        <Route path="/catalog" element={<Catalog />}></Route>
-                        <Route path="/details" element={<Details />}></Route>
-                        <Route path="/profile" element={<Profile />}></Route>
-                        <Route path="*" element={<NotFound />}></Route>
-                    </Routes>
-                </InnerWrap>
-            </BrowserRouter>
-        </div >
+            <ContentWrap maxWidth="xl" data-testid="library-routes" >
+                <Routes>
+                    <Route path="/" element={<Home />}></Route>
+                    <Route path="/catalog" element={<Catalog />}></Route>
+                    <Route path="/details" element={<Details />}></Route>
+                    <Route path="/profile" element={<Profile />}></Route>
+                    <Route path="*" element={<NotFound />}></Route>
+                </Routes>
+            </ContentWrap>
+        </Wrapper >
     )
 }
 

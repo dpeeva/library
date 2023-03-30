@@ -1,2 +1,2 @@
+export { ContentWrap } from "./ContentWrap"
 export { Header } from "./Header"
-export { InnerWrap } from "./InnerWrap"

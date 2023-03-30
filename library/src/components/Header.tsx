@@ -1,65 +1,61 @@
 import * as React from "react"
-import styled from "styled-components"
-import { BrowserRouter, Link } from "react-router-dom"
-import { logo } from "../assets"
-import { InnerWrap } from "./InnerWrap"
+import { Link } from "react-router-dom"
+import { logo, mui } from "../assets"
 
-const StyledHeader = styled("header")`
-background-color: #fff;
-color: #fff;
-`
+const NavLink = mui.styled(Link)(({ theme }) => ({
+    position: "relative",
+    padding: "16px",
+    fontWeight: "bold",
+    color: theme.palette.grey[800],
+    textDecoration: "none",
 
-const HeaderWrap = styled(InnerWrap)`
-background-color: transparent;
+    "&:after": {
+        display: "block",
+        content: "''",
+        position: "absolute",
+        bottom: "7px",
+        left: "0",
+        width: "100%",
+        height: "2px",
+        backgroundColor: theme.palette.secondary.light,
+        transition: "transform 0.3s ease",
+        transform: "scaleX(0)",
+    },
 
-&:after {
-    display: block;
-    content: "";
-    clear: both;
-}
+    "&:hover": {
+        color: theme.palette.secondary.dark,
+        "&:after": {
+            transform: "scaleX(1)",
+        }
+    }
+}))
 
-.logo-link {
-    display: inline-block;
-    float: left;
-    margin: 16px;
-}
-
-.nav-item {
-    display: inline-flex;
-    align-items: center;
-    margin: 0 16px;
-    height: 80px;
-    vertical-align: middle;
-}
-`
-
-const Nav = styled("nav")`
-flex-grow: 1;
-font-size: 18px;
-text-align: end;
-text-transform: uppercase;
-font-weight: bold;
-`
-
-const Logo = styled("img")`
-float: left;
+const Logo = mui.styled("img")`
 `
 
 export const Header: React.FunctionComponent = () => {
-    return <BrowserRouter>
-        <StyledHeader>
-            <HeaderWrap>
-                <Link className="logo-link" to="/">
-                    <Logo src={logo} alt="bgreader logo" />
+    return <mui.AppBar
+        data-testid="library-header"
+        position="sticky"
+        color={"default"}
+    >
+        <mui.Container maxWidth="xl">
+            <mui.Toolbar disableGutters>
+                <Link to="/">
+                    <Logo src={logo} alt="bgreader logo" width={"160px"} />
                 </Link>
-                <Nav>
-                    <Link className="nav-item" to="/catalog">Catalog</Link>
-                    <Link className="nav-item" to="/profile">Profile</Link>
-                    <Link className="nav-item" to="/logout">Login</Link>
-                    <Link className="nav-item" to="/login">Logout</Link>
-                    <Link className="nav-item" to="/register">Register</Link>
-                </Nav>
-            </HeaderWrap>
-        </StyledHeader>
-    </BrowserRouter>
+                <mui.Stack direction={"row"} component={"nav"} sx={{
+                    display: "flex",
+                    flexGrow: 1,
+                    justifyContent: "end"
+                }}>
+                    <NavLink to="/catalog">Catalog</NavLink>
+                    <NavLink to="/profile">Profile</NavLink>
+                    <NavLink to="/login">Login</NavLink>
+                    <NavLink to="/register">Register</NavLink>
+                    <NavLink to="/logout">Logout</NavLink>
+                </mui.Stack>
+            </mui.Toolbar>
+        </mui.Container>
+    </mui.AppBar>
 }

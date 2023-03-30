@@ -6,6 +6,6 @@ interface Props {
 
 export class Catalog extends React.Component<Props> {
     render() {
-        return <></>
+        return <>Catalog</>
     }
 }

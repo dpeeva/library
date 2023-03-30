@@ -6,6 +6,6 @@ interface Props {
 
 export class Home extends React.Component<Props> {
     render() {
-        return <></>
+        return <>Home</>
     }
 }
