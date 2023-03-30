@@ -1,3 +1,0 @@
-[submodule "library/src/packages/storybook-vercel"]
-	path = library/src/packages/storybook-vercel
-	url = git@github.com:dpeeva/storybook-vercel.git
