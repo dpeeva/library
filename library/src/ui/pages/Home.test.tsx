@@ -1,0 +1,23 @@
+import { render, screen } from "@testing-library/react"
+import { StoreContext } from "../../context"
+import { BookConnectionMock, Store } from "../../data"
+import { Home } from "./Home"
+
+describe("Home page", () => {
+    let store: Store
+    beforeEach(() => {
+        store = new Store(
+            new BookConnectionMock(),
+        )
+        render(
+            <StoreContext.Provider value={store}>
+                <Home />
+            </StoreContext.Provider>
+        )
+    })
+
+    it("renders correctly", () => {
+        expect(screen.getByTestId("library-app-home")).not.toBeNull()
+        expect(screen.getByTestId("library-app-booklist")).not.toBeNull()
+    })
+})

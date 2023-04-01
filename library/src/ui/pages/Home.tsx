@@ -8,7 +8,7 @@ import { SectionHeading } from "../SectionHeading"
 
 export class Home extends React.Component {
     render() {
-        return <PageContainer>
+        return <PageContainer data-testid="library-app-home">
             <HeroUnit />
             <SectionWrap>
                 <SectionHeading variant="h4">

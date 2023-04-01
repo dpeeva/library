@@ -13,7 +13,7 @@ const UserActions = mui.styled(mui.Box)(({ theme }) => ({
 export const BooksList: React.FunctionComponent = () => {
     const { bookStore } = React.useContext(StoreContext)
 
-    return <mui.Grid container spacing={8}>
+    return <mui.Grid container spacing={8} data-testid="library-app-booklist" >
         {bookStore.books.map(
             (book: Book, index: number) => (
                 <mui.Grid key={`book-${index}`} item xs={6} md={4} lg={3}>

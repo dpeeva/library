@@ -10,7 +10,7 @@ interface Props {
 
 export class NotFound extends React.Component<Props> {
     render() {
-        return <PageContainer>
+        return <PageContainer data-testid="library-app-404">
             <SectionWrap>
                 <SectionHeading variant="h4">
                     404: Page Not Found

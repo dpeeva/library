@@ -8,7 +8,7 @@ import { SectionWrap } from "../SectionWrap"
 export class Catalog extends React.Component {
 
     render() {
-        return <PageContainer>
+        return <PageContainer data-testid="library-app-catalog">
             <SectionWrap>
                 <SectionHeading variant="h4">
                     Каталог
