@@ -1,0 +1,257 @@
+import { Book } from "../../domain"
+
+const books: Book[] = [
+    {
+        id: 1,
+        title: "Война и мир",
+        author: [
+            "Лев Толстой"
+        ],
+        volume: 1,
+        publisher: [
+            "Кръг"
+        ],
+        yearOfRelease: 2021,
+        pagesCount: 516,
+        cover: "hardcover",
+        coverImage: "https://kryg.eu/wp-content/uploads/2021/11/%D0%9A%D0%BE%D1%80%D0%B8%D1%86%D0%B0-%D0%A2%D0%BE%D0%BC-1-RGB-0-scaled.jpg"
+    },
+    {
+        id: 2,
+        title: "Война и мир",
+        author: [
+            "Лев Толстой"
+        ],
+        volume: 2,
+        publisher: [
+            "Кръг"
+        ],
+        yearOfRelease: 2021,
+        pagesCount: 600,
+        cover: "hardcover",
+        coverImage: "https://kryg.eu/wp-content/uploads/2021/11/%D0%9A%D0%BE%D1%80%D0%B8%D1%86%D0%B0-%D0%A2%D0%BE%D0%BC-2-RGB-0-scaled.jpg"
+    },
+    {
+        id: 3,
+        title: "Война и мир",
+        author: [
+            "Лев Толстой"
+        ],
+        volume: 3,
+        publisher: [
+            "Кръг"
+        ],
+        yearOfRelease: 2021,
+        pagesCount: 524,
+        cover: "hardcover",
+        coverImage: "https://kryg.eu/wp-content/uploads/2021/11/%D0%9A%D0%BE%D1%80%D0%B8%D1%86%D0%B0-%D0%A2%D0%BE%D0%BC-3-RGB-0-scaled.jpg"
+    },
+    {
+        id: 4,
+        title: "Война и мир",
+        author: [
+            "Лев Толстой"
+        ],
+        volume: 4,
+        publisher: [
+            "Кръг"
+        ],
+        yearOfRelease: 2021,
+        pagesCount: 548,
+        cover: "hardcover",
+        coverImage: "https://kryg.eu/wp-content/uploads/2021/11/%D0%9A%D0%BE%D1%80%D0%B8%D1%86%D0%B0-%D0%A2%D0%BE%D0%BC-4-RGB-0-scaled.jpg"
+    },
+    {
+        id: 5,
+        title: "Някакво много дълго заглавие на книга, което не се побира на един ред",
+        author: [
+            "Author 1",
+            "Author 2"
+        ],
+        publisher: [
+            'Университетско издателство "Св. Климент Охридски"',
+            "Захарий Стоянов"
+        ],
+        yearOfRelease: 2005,
+        pagesCount: 208,
+        cover: "softcover",
+    },
+    {
+        id: 6,
+        title: "Човек на име Уве",
+        author: [
+            "Фредрик Бакман"
+        ],
+        publisher: [
+            "Сиела"
+        ],
+        yearOfRelease: 2022,
+        pagesCount: 296,
+        cover: "softcover",
+        coverImage: "https://www.ciela.com/media/catalog/product/cache/32bb0748c82325b02c55df3c2a9a9856/c/h/chovek-na-ime-uve-bakman-ciela-front.jpg"
+    },
+    {
+        id: 7,
+        title: "Бьорнстад",
+        author: [
+            "Фредрик Бакман"
+        ],
+        publisher: [
+            "Сиела"
+        ],
+        yearOfRelease: 2017,
+        pagesCount: 464,
+        cover: "softcover",
+        coverImage: "https://www.ciela.com/media/catalog/product/cache/9a7ceae8a5abbd0253425b80f9ef99a5/f/i/file_53_182.jpg"
+    },
+    {
+        id: 8,
+        title: "Структурална антропология",
+        author: [
+            "Клод Леви-Строс"
+        ],
+        volume: 1,
+        publisher: [
+            "Захарий Стоянов"
+        ],
+        yearOfRelease: 2015,
+        pagesCount: 496,
+        cover: "hardcover",
+        coverImage: "https://www.book.store.bg/lrgimg/158487/strukturalna-antropologia-tom-1.jpg"
+    },
+    {
+        id: 9,
+        title: "Структурална антропология",
+        author: [
+            "Клод Леви-Строс"
+        ],
+        volume: 2,
+        publisher: [
+            "Захарий Стоянов"
+        ],
+        yearOfRelease: 2015,
+        pagesCount: 470,
+        cover: "hardcover",
+        coverImage: "https://zstoyanov.com/wp-content/uploads/2015/07/Strukturalna-antropologia-2.jpg"
+    },
+    {
+        id: 10,
+        title: "1Q84",
+        author: [
+            "Харуки Мураками"
+        ],
+        publisher: [
+            "Колибри"
+        ],
+        yearOfRelease: 2023,
+        pagesCount: 976,
+        cover: "softcover",
+        coverImage: "https://www.colibri.bg/k_img/1q84c3.jpg"
+    },
+    {
+        id: 11,
+        title: "Майка Нощ",
+        author: [
+            "Кърт Вонегът"
+        ],
+        publisher: [
+            "Кръг"
+        ],
+        yearOfRelease: 2021,
+        pagesCount: 248,
+        cover: "hardcover",
+        coverImage: "https://kryg.eu/wp-content/uploads/2021/11/Mayka-Nosht-koritsa.jpg"
+    },
+    {
+        id: 12,
+        title: "Механично пиано",
+        author: [
+            "Кърт Вонегът"
+        ],
+        publisher: [
+            "Кръг"
+        ],
+        yearOfRelease: 2021,
+        pagesCount: 448,
+        cover: "hardcover",
+        coverImage: "https://kryg.eu/wp-content/uploads/2021/02/147681510_3080159595595971_1164459369760103465_n.jpg"
+    },
+    {
+        id: 13,
+        title: "Сирените от Титан",
+        author: [
+            "Кърт Вонегът"
+        ],
+        publisher: [
+            "Кръг"
+        ],
+        yearOfRelease: 2021,
+        pagesCount: 328,
+        cover: "hardcover",
+        coverImage: "https://kryg.eu/wp-content/uploads/2021/05/Sirens_of_Titan_koritsa.jpg"
+    },
+    {
+        id: 14,
+        title: "Котешка люлка",
+        author: [
+            "Кърт Вонегът"
+        ],
+        publisher: [
+            "Кръг"
+        ],
+        yearOfRelease: 2022,
+        pagesCount: 336,
+        cover: "hardcover",
+        coverImage: "https://kryg.eu/wp-content/uploads/2022/03/Koteshka-lyulka-koritsa.jpg"
+    },
+    {
+        id: 15,
+        title: "Синята брада",
+        author: [
+            "Кърт Вонегът"
+        ],
+        publisher: [
+            "Кръг"
+        ],
+        yearOfRelease: 2022,
+        pagesCount: 328,
+        cover: "hardcover",
+        coverImage: "https://kryg.eu/wp-content/uploads/2022/08/Sinyata_brada_koritsa.jpg"
+    },
+    {
+        id: 16,
+        title: "Кланица пет",
+        author: [
+            "Кърт Вонегът"
+        ],
+        publisher: [
+            "Кръг"
+        ],
+        yearOfRelease: 2022,
+        pagesCount: 232,
+        cover: "hardcover",
+        coverImage: "https://kryg.eu/wp-content/uploads/2022/10/Slaughterhouse5_print_261022-page-001-4.jpg"
+    },
+    {
+        id: 17,
+        title: "Закуска за шампиони",
+        author: [
+            "Кърт Вонегът"
+        ],
+        publisher: [
+            "Кръг"
+        ],
+        yearOfRelease: 2023,
+        pagesCount: 296,
+        cover: "hardcover",
+        coverImage: "https://kryg.eu/wp-content/uploads/2023/03/Zakuska-za-shampioni_korica.jpg"
+    },
+]
+
+
+export const BookConnectionMockData = {
+    data: {
+        books: books,
+        totalRows: books.length
+    }
+}
