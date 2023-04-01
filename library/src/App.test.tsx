@@ -10,6 +10,6 @@ test("renders App container", () => {
     </BrowserRouter>
   )
   expect(screen.getByTestId("library-app")).not.toBeNull()
-  expect(screen.getByTestId("library-header")).not.toBeNull()
-  expect(screen.getByTestId("library-routes")).not.toBeNull()
+  expect(screen.getByTestId("library-app-header")).not.toBeNull()
+  expect(screen.getByTestId("library-app-routes")).not.toBeNull()
 })

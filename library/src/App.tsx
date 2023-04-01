@@ -28,7 +28,7 @@ export class App extends React.Component {
             <StoreContext.Provider value={this.store as Store}>
                 <Wrapper data-testid="library-app">
                     <Header />
-                    <ContentWrap data-testid="library-routes" maxWidth="xl">
+                    <ContentWrap data-testid="library-app-routes" maxWidth="xl">
                         <Routes>
                             <Route path="/" element={<Home />}></Route>
                             <Route path="/catalog" element={<Catalog />}></Route>

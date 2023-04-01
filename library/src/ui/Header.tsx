@@ -40,7 +40,7 @@ const Logo = mui.styled("img")({})
 export class Header extends React.Component {
     render() {
         return <mui.AppBar
-            data-testid="library-header"
+            data-testid="library-app-header"
             position="sticky"
             color={"default"}
         >
