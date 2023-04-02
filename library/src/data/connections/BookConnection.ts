@@ -27,7 +27,7 @@ export class BookConnection implements IBookConnection {
 
     getParams(request: BooksRequestType) {
         const params = new URLSearchParams()
-        params.append("id", request.id.toString())
+        request.id && params.append("id", request.id.toString())
         params.append("Page", request.pagination.page.toString())
         params.append("PageSize", request.pagination.pageSize.toString())
         return params.toString()

@@ -60,7 +60,6 @@ describe("BookConnection", () => {
 
         try {
             await instance.fetchAllBooks({
-                id: 0,
                 pagination: {
                     page: 1,
                     pageSize: 15
