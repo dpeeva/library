@@ -1,13 +1,13 @@
 import { BookStore } from "./BookStore"
 import { IBookConnection } from "./connections"
-import { BookStream } from "./streams"
+import { BooksProvider } from "./providers"
 
 export class Store {
     public readonly bookStore: BookStore
 
     constructor(connection: IBookConnection) {
-        const bookStream = new BookStream(connection)
+        const provider = new BooksProvider(connection)
 
-        this.bookStore = new BookStore(bookStream)
+        this.bookStore = new BookStore(provider)
     }
 }

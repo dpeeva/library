@@ -1,15 +1,15 @@
 import { computed } from "mobx"
 import { Book } from "../domain"
 import { BookConnectionMockData } from "./mocks"
-import { BookStream } from "./streams"
+import { BooksProvider } from "./providers"
 
 export class BookStore {
-    constructor(public readonly booksStream: BookStream) {
+    constructor(public readonly provider: BooksProvider) {
     }
 
     @computed get books(): Book[] {
-        return this.booksStream.data.length
-            ? this.booksStream.data
+        return this.provider.data.books.length
+            ? this.provider.data.books
             : BookConnectionMockData.data.books // TODO: use real data
     }
 }
