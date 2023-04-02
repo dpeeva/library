@@ -1,2 +1,2 @@
-export * from "./BookConnectionMock"
-export * from "./BookConnectionMockData"
+export * from "./BooksConnectionMock"
+export * from "./BooksConnectionMockData"

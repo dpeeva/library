@@ -1,10 +1,10 @@
 import { Book } from "../../domain"
-import { BookConnectionMockData } from "../mocks"
+import { BooksConnectionMockData } from "../mocks"
 import { BooksParser } from "./BooksParser"
 
 describe("BooksParser", () => {
     it("should parse payload", () => {
-        const books: Book[] = [BookConnectionMockData.data.books[0]]
+        const books: Book[] = [BooksConnectionMockData.data.books[0]]
 
         const parser = new BooksParser(
             JSON.stringify({ books: books, totalRows: books.length })

@@ -1,8 +1,8 @@
 import { AjaxService } from "../../services"
-import { BookConnection } from "./BookConnection"
+import { BooksConnection } from "./BooksConnection"
 
-describe("BookConnection", () => {
-    let instance: BookConnection
+describe("BooksConnection", () => {
+    let instance: BooksConnection
     let url: string
     let response: {
         ok: boolean
@@ -31,7 +31,7 @@ describe("BookConnection", () => {
             addGlobalHeaders: jest.fn()
         } as any
 
-        instance = new BookConnection(url, ajax)
+        instance = new BooksConnection(url, ajax)
     })
 
     afterEach(() => {

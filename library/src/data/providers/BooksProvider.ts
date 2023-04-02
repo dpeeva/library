@@ -1,14 +1,14 @@
 import { observable, runInAction } from "mobx"
 import { BookData, BooksRequestType } from "../../domain"
 import { NotificationService } from "../../utils"
-import { IBookConnection } from "../connections"
+import { IBooksConnection } from "../connections"
 import { BooksParser } from "../parsers"
 
 export class BooksProvider {
     data: BookData
     options: BooksRequestType
 
-    constructor(private connection: IBookConnection, options?: BooksRequestType) {
+    constructor(private connection: IBooksConnection, options?: BooksRequestType) {
         this.data = this.setInitialData()
         this.options = options || {} as BooksRequestType
     }

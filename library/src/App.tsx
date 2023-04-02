@@ -2,7 +2,7 @@ import * as React from "react"
 import { mui } from "./assets"
 import { Routes, Route } from "react-router-dom"
 import { StoreContext } from "./context"
-import { BookConnection, IBookConnection, Store } from "./data"
+import { BooksConnection, IBooksConnection, Store } from "./data"
 import { Catalog, ContentWrap, Details, Header, Home, NotFound, Profile } from "./ui"
 import { AjaxService } from "./services"
 
@@ -12,14 +12,14 @@ const Wrapper = mui.styled(mui.Box)(({ theme }) => ({
 
 export class App extends React.Component {
     private store: Store
-    private readonly bookConnection: IBookConnection
+    private readonly booksConnection: IBooksConnection
 
     constructor(props: any) {
         super(props)
         const ajax = new AjaxService()
-        this.bookConnection = new BookConnection("http://127.0.0.1/api/books", ajax)
+        this.booksConnection = new BooksConnection("http://127.0.0.1/api/books", ajax)
         this.store = new Store(
-            this.bookConnection
+            this.booksConnection
         )
     }
 

@@ -1,14 +1,14 @@
 import { toJS } from "mobx"
 import { NotificationService } from "../../utils"
-import { BookConnectionMock, BookConnectionMockData } from "../mocks"
+import { BooksConnectionMock, BooksConnectionMockData } from "../mocks"
 import { BooksProvider } from "./BooksProvider"
 
 describe("BooksProvider", () => {
-    let connection: BookConnectionMock
+    let connection: BooksConnectionMock
     let instance: BooksProvider
 
     beforeEach(() => {
-        connection = new BookConnectionMock()
+        connection = new BooksConnectionMock()
         connection.fetchAllBooks = jest.fn(connection.fetchAllBooks)
         instance = new BooksProvider(connection, {
             pagination: {
@@ -43,8 +43,8 @@ describe("BooksProvider", () => {
     //         }
     //     })
     //     await instance.fetch()
-    //     expect(instance.data.books).toEqual(BookConnectionMockData.data.books)
-    //     expect(instance.data.totalRows).toEqual(BookConnectionMockData.data.totalRows)
+    //     expect(instance.data.books).toEqual(BooksConnectionMockData.data.books)
+    //     expect(instance.data.totalRows).toEqual(BooksConnectionMockData.data.totalRows)
     // })
     // 
     // it("should throw an error on fetch", async () => {

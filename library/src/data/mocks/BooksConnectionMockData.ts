@@ -249,7 +249,7 @@ const books: Book[] = [
 ]
 
 
-export const BookConnectionMockData = {
+export const BooksConnectionMockData = {
     data: {
         books: books,
         totalRows: books.length

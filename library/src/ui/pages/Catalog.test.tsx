@@ -1,13 +1,13 @@
 import { render, screen } from "@testing-library/react"
 import { StoreContext } from "../../context"
-import { BookConnectionMock, Store } from "../../data"
+import { BooksConnectionMock, Store } from "../../data"
 import { Catalog } from "./Catalog"
 
 describe("Catalog page", () => {
     let store: Store
     beforeEach(() => {
         store = new Store(
-            new BookConnectionMock(),
+            new BooksConnectionMock(),
         )
         render(
             <StoreContext.Provider value={store}>

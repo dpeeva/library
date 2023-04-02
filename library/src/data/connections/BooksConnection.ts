@@ -1,11 +1,11 @@
 import { BooksRequestType } from "../../domain"
 import { AjaxService } from "../../services"
 
-export interface IBookConnection {
+export interface IBooksConnection {
     fetchAllBooks(request: BooksRequestType): Promise<string>
 }
 
-export class BookConnection implements IBookConnection {
+export class BooksConnection implements IBooksConnection {
 
     constructor(
         public readonly baseUrl: string,

@@ -1,1 +1,1 @@
-export * from "./BookConnection"
+export * from "./BooksConnection"

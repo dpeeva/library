@@ -1,6 +1,6 @@
 import { computed } from "mobx"
 import { Book } from "../domain"
-import { BookConnectionMockData } from "./mocks"
+import { BooksConnectionMockData } from "./mocks"
 import { BooksProvider } from "./providers"
 
 export class BookStore {
@@ -10,6 +10,6 @@ export class BookStore {
     @computed get books(): Book[] {
         return this.provider.data.books.length
             ? this.provider.data.books
-            : BookConnectionMockData.data.books // TODO: use real data
+            : BooksConnectionMockData.data.books // TODO: use real data
     }
 }
