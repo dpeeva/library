@@ -7,8 +7,8 @@ export class BooksParser {
         const parsedResponse = response && JSON.parse(response)
 
         this.data = {
-            books: parsedResponse?.books,
-            totalRows: parsedResponse?.totalRows
+            books: parsedResponse?.books || [], // TODO: send from BE
+            totalRows: parsedResponse?.totalRows || 0 // TODO: send from BE
         }
     }
 }

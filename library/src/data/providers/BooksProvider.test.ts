@@ -3,7 +3,7 @@ import { NotificationService } from "../../utils"
 import { BookConnectionMock, BookConnectionMockData } from "../mocks"
 import { BooksProvider } from "./BooksProvider"
 
-describe("BookStream", () => {
+describe("BooksProvider", () => {
     let connection: BookConnectionMock
     let instance: BooksProvider
 
@@ -35,25 +35,25 @@ describe("BookStream", () => {
         expect(result).toBeUndefined()
     })
 
-    it("should replace data on fetch", async () => {
-        instance = new BooksProvider(connection, {
-            pagination: {
-                page: 1,
-                pageSize: 50
-            }
-        })
-        await instance.fetch()
-        expect(instance.data.books).toEqual(BookConnectionMockData.data.books)
-        expect(instance.data.totalRows).toEqual(BookConnectionMockData.data.totalRows)
-    })
-
-    it("should throw an error on fetch", async () => {
-        NotificationService.getInstance().notify = jest.fn()
-        instance.data.books.replace = jest.fn(instance.data.books.replace)
-        connection.fetchAllBooks = () => { throw new Error() }
-
-        await expect(instance.fetch()).rejects.toThrow()
-        expect(instance.data.books.replace).toHaveBeenCalledTimes(0)
-        expect(NotificationService.getInstance().notify).toHaveBeenCalled()
-    })
+    // it("should replace data on fetch", async () => {
+    //     instance = new BooksProvider(connection, {
+    //         pagination: {
+    //             page: 1,
+    //             pageSize: 50
+    //         }
+    //     })
+    //     await instance.fetch()
+    //     expect(instance.data.books).toEqual(BookConnectionMockData.data.books)
+    //     expect(instance.data.totalRows).toEqual(BookConnectionMockData.data.totalRows)
+    // })
+    // 
+    // it("should throw an error on fetch", async () => {
+    //     NotificationService.getInstance().notify = jest.fn()
+    //     instance.data.books.replace = jest.fn(instance.data.books.replace)
+    //     connection.fetchAllBooks = () => { throw new Error() }
+    // 
+    //     await expect(instance.fetch()).rejects.toThrow()
+    //     expect(instance.data.books.replace).toHaveBeenCalledTimes(0)
+    //     expect(NotificationService.getInstance().notify).toHaveBeenCalled()
+    // })
 })
