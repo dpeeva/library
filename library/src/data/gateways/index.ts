@@ -1,1 +1,0 @@
-export { BooksGateway } from "./BooksGateway"

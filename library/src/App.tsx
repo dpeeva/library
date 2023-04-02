@@ -11,7 +11,7 @@ const Wrapper = mui.styled(mui.Box)(({ theme }) => ({
 }))
 
 export class App extends React.Component {
-    private store?: Store
+    private store: Store
     private readonly bookConnection: IBookConnection
 
     constructor(props: any) {
