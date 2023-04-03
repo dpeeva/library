@@ -54,11 +54,11 @@ export class Header extends React.Component {
                         flexGrow: 1,
                         justifyContent: "end"
                     }}>
-                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/catalog">Catalog</Link>
-                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/profile">Profile</Link>
-                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/login">Login</Link>
-                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/register">Register</Link>
-                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/logout">Logout</Link>
+                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/catalog">Каталог</Link>
+                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/profile">Профил</Link>
+                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/login">Вход</Link>
+                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/register">Регистрация</Link>
+                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/logout">Изход</Link>
                     </mui.Stack>
                 </mui.Toolbar>
             </mui.Container>
