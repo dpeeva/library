@@ -1,16 +1,10 @@
 import * as React from "react"
 import { StoreContext } from "../../context"
-import { PageContainer } from "../PageContainer"
-import { SectionHeading } from "../SectionHeading"
-import { SectionWrap } from "../SectionWrap"
+import { PageContainer, SectionHeading, SectionWrap } from ".."
 
-interface Props {
-    //
-}
-
-export class Profile extends React.Component<Props> {
+export class Profile extends React.Component {
     render() {
-        return <PageContainer>
+        return <PageContainer data-testid="library-app-profile">
             <SectionWrap>
                 <SectionHeading variant="h4">
                     Profile

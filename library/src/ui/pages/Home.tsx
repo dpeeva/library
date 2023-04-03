@@ -1,10 +1,6 @@
 import * as React from "react"
 import { StoreContext } from "../../context"
-import { BooksList } from "../BooksList"
-import { SectionWrap } from "../SectionWrap"
-import { HeroUnit } from "../HeroUnit"
-import { PageContainer } from "../PageContainer"
-import { SectionHeading } from "../SectionHeading"
+import { BooksList, HeroUnit, PageContainer, SectionHeading, SectionWrap } from ".."
 
 export class Home extends React.Component {
     render() {

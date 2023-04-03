@@ -1,14 +1,8 @@
 import * as React from "react"
 import { StoreContext } from "../../context"
-import { PageContainer } from "../PageContainer"
-import { SectionHeading } from "../SectionHeading"
-import { SectionWrap } from "../SectionWrap"
+import { PageContainer, SectionHeading, SectionWrap } from ".."
 
-interface Props {
-    //
-}
-
-export class NotFound extends React.Component<Props> {
+export class NotFound extends React.Component {
     render() {
         return <PageContainer data-testid="library-app-404">
             <SectionWrap>
