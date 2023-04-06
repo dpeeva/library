@@ -3,7 +3,7 @@ import { mui } from "./assets"
 import { Routes, Route } from "react-router-dom"
 import { StoreContext } from "./context"
 import { BooksConnection, IBooksConnection, Store } from "./data"
-import { Catalog, ContentWrap, Details, Header, Home, NotFound, Profile } from "./ui"
+import { Catalog, ContentWrap, Details, Header, Home, Login, NotFound, Profile, Register } from "./ui"
 import { AjaxService } from "./services"
 import { IUserConnection, UserConnection } from "./data/connections/UserConnection"
 
@@ -39,6 +39,8 @@ export class App extends React.Component {
                             <Route path="/catalog" element={<Catalog />}></Route>
                             <Route path="/details" element={<Details />}></Route>
                             <Route path="/profile" element={<Profile />}></Route>
+                            <Route path="/login" element={<Login />}></Route>
+                            <Route path="/register" element={<Register />}></Route>
                             <Route path="*" element={<NotFound />}></Route>
                         </Routes>
                     </ContentWrap>
