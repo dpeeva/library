@@ -2,6 +2,7 @@ import * as React from "react"
 import { NavLink } from "react-router-dom"
 import { logo, mui } from "../assets"
 import { StoreContext } from "../context"
+import { Store } from "../data"
 
 const Link = mui.styled(NavLink)(({ theme }) => ({
     position: "relative",
@@ -38,7 +39,14 @@ const Link = mui.styled(NavLink)(({ theme }) => ({
 const Logo = mui.styled("img")({})
 
 export class Header extends React.Component {
+
+    private get store(): Store {
+        return this.context as Store
+    }
+
     render() {
+        const { isAuthenticated } = this.store.userState
+
         return <mui.AppBar
             data-testid="library-app-header"
             position="sticky"
@@ -55,10 +63,15 @@ export class Header extends React.Component {
                         justifyContent: "end"
                     }}>
                         <Link className={({ isActive }) => isActive ? "active" : ""} to="/catalog">Каталог</Link>
-                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/profile">Профил</Link>
+
+                        {isAuthenticated &&
+                            <Link className={({ isActive }) => isActive ? "active" : ""} to="/profile">Профил</Link>
+                        }
                         <Link className={({ isActive }) => isActive ? "active" : ""} to="/login">Вход</Link>
                         <Link className={({ isActive }) => isActive ? "active" : ""} to="/register">Регистрация</Link>
-                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/logout">Изход</Link>
+                        {isAuthenticated &&
+                            <Link className={({ isActive }) => isActive ? "active" : ""} to="/logout">Изход</Link>
+                        }
                     </mui.Stack>
                 </mui.Toolbar>
             </mui.Container>
