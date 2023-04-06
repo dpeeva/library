@@ -1,13 +1,21 @@
 import { BookStore } from "./BookStore"
 import { IBooksConnection } from "./connections"
-import { BooksProvider } from "./providers"
+import { IUserConnection } from "./connections/UserConnection"
+import { AuthProvider, BooksProvider } from "./providers"
+import { UserState } from "./UserState"
 
 export class Store {
     public readonly bookStore: BookStore
+    public readonly userState: UserState
 
-    constructor(connection: IBooksConnection) {
-        const provider = new BooksProvider(connection)
+    constructor(
+        booksConnection: IBooksConnection,
+        userConnection: IUserConnection
+    ) {
+        const booksProvider = new BooksProvider(booksConnection)
+        this.bookStore = new BookStore(booksProvider)
 
-        this.bookStore = new BookStore(provider)
+        const authProvider = new AuthProvider(userConnection)
+        this.userState = new UserState(authProvider)
     }
 }

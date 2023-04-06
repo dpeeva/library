@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import { StoreContext } from "../../context"
-import { BooksConnectionMock, Store } from "../../data"
+import { BooksConnectionMock, Store, UserConnectionMock } from "../../data"
 import { Profile } from "./Profile"
 
 describe("Profile page", () => {
@@ -8,6 +8,7 @@ describe("Profile page", () => {
     beforeEach(() => {
         store = new Store(
             new BooksConnectionMock(),
+            new UserConnectionMock()
         )
         render(
             <StoreContext.Provider value={store}>
