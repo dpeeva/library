@@ -4,7 +4,7 @@ import { RegisterForm, PageContainer, SectionHeading, SectionWrap } from ".."
 
 export class Register extends React.Component {
     render() {
-        return <PageContainer data-testid="library-app-home" sx={{
+        return <PageContainer data-testid="library-app-register" sx={{
             margin: "0 auto",
             maxWidth: "400px",
         }}>

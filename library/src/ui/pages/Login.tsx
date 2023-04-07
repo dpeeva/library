@@ -4,7 +4,7 @@ import { LoginForm, PageContainer, SectionHeading, SectionWrap } from ".."
 
 export class Login extends React.Component {
     render() {
-        return <PageContainer data-testid="library-app-home" sx={{
+        return <PageContainer data-testid="library-app-login" sx={{
             margin: "0 auto",
             maxWidth: "400px",
         }}>

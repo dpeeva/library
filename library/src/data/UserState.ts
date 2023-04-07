@@ -22,4 +22,8 @@ export class UserState {
     onRegister() {
         this.provider.userRegister()
     }
+
+    onLogout() {
+        this.provider.userLogout()
+    }
 }
