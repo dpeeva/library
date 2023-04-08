@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import { StoreContext } from "../../context"
-import { BooksConnectionMock, Store, UserConnectionMock } from "../../data"
+import { BookDetailsConnectionMock, BooksConnectionMock, Store, UserConnectionMock } from "../../data"
 import { Catalog } from "./Catalog"
 
 describe("Catalog page", () => {
@@ -8,6 +8,7 @@ describe("Catalog page", () => {
     beforeEach(() => {
         store = new Store(
             new BooksConnectionMock(),
+            new BookDetailsConnectionMock(),
             new UserConnectionMock()
         )
         render(

@@ -1,19 +1,25 @@
 import { BookStore } from "./BookStore"
 import { BookDetailsStore } from "./BookDetailsStore"
-import { IBooksConnection, IUserConnection } from "./connections"
-import { authProviderFactory, booksProviderFactory } from "./providers"
+import { IBookDetailsConnection, IBooksConnection, IUserConnection } from "./connections"
+import { authProviderFactory, bookDetailsProviderFactory, booksProviderFactory } from "./providers"
 import { UserState } from "./UserState"
 
 export class Store {
     public readonly bookStore: BookStore
+    public readonly bookDetailsStore: BookDetailsStore
     public readonly userState: UserState
 
     constructor(
         booksConnection: IBooksConnection,
+        bookDetailsConnection: IBookDetailsConnection,
         userConnection: IUserConnection
     ) {
         this.bookStore = new BookStore(
             booksProviderFactory(booksConnection)
+        )
+
+        this.bookDetailsStore = new BookDetailsStore(
+            bookDetailsProviderFactory(bookDetailsConnection)
         )
 
         this.userState = new UserState(

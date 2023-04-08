@@ -4,9 +4,9 @@ import { mui, muiIcon } from "../../assets"
 import { StoreContext } from "../../context"
 import { PageContainer, SectionHeading, SectionWrap } from ".."
 
-const BookDetails = mui.styled(mui.Box)(({ theme }) => ({
+const BookDetails = mui.styled(mui.Box)({
     //
-}))
+})
 
 const UserActions = mui.styled(mui.Box)(({ theme }) => ({
     padding: "4px",
@@ -17,8 +17,8 @@ const UserActions = mui.styled(mui.Box)(({ theme }) => ({
 
 export const Details = () => {
     const { id } = useParams()
-    const { books } = React.useContext(StoreContext)
-    const book = books.find((b: Book) => b._id === id)
+    const { bookDetails } = React.useContext(StoreContext).bookDetailsStore
+    debugger
 
     return <PageContainer data-testid="library-app-details">
         <SectionWrap>
@@ -27,12 +27,12 @@ export const Details = () => {
             </SectionHeading>
 
             <BookDetails>
-                {book && <mui.Card>
+                {bookDetails && <mui.Card>
                     <mui.CardMedia
                         component="img"
-                        alt={`${book.title}`}
+                        alt={`${bookDetails.title}`}
                         height="460"
-                        image={book.coverImage || "https://placehold.co/415x600"}
+                        image={bookDetails.coverImage || "https://placehold.co/415x600"}
                     />
                     <UserActions>
                         <mui.Tooltip
@@ -59,16 +59,16 @@ export const Details = () => {
                             maxHeight: "96px",
                             overflow: "hidden",
                         }}>
-                            {book.title}
+                            {bookDetails.title}
                         </mui.Typography>
                         <mui.Typography variant="body1" mt={1}>
-                            {book.author}
+                            {bookDetails.author}
                         </mui.Typography>
                         <mui.Typography mt={1}>
-                            Publisher: {book.publisher}
+                            Publisher: {bookDetails.publisher}
                         </mui.Typography>
-                        {book.volume && <mui.Typography mt={1}>
-                            Volume: {book.volume}
+                        {bookDetails.volume && <mui.Typography mt={1}>
+                            Volume: {bookDetails.volume}
                         </mui.Typography>}
                     </mui.CardContent>
 
