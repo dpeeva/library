@@ -6,6 +6,7 @@ import { BooksConnection, IBooksConnection, Store } from "./data"
 import { Catalog, ContentWrap, Details, Header, Home, Login, NotFound, Profile, Register } from "./ui"
 import { AjaxService } from "./services"
 import { IUserConnection, UserConnection } from "./data/connections/UserConnection"
+import "./App.css"
 
 const Wrapper = mui.styled(mui.Box)(({ theme }) => ({
     minHeight: "100vh",
