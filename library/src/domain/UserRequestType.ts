@@ -6,4 +6,5 @@ export type UserRequestType = {
     username: string
     email: string
     password: string
+    passwordRepeated?: string
 }

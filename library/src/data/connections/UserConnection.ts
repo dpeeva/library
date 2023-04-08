@@ -57,7 +57,6 @@ export class UserConnection implements IUserConnection {
             method: "POST",
             headers: {
                 "content-type": "application/json",
-                "X-Authorization": request.jwt,
             },
             body: JSON.stringify({
                 email: request.username,
@@ -67,7 +66,7 @@ export class UserConnection implements IUserConnection {
         const respText = await resp.text()
 
         if (!resp.ok) {
-            throw new Error(`Could not login: ${resp.status} ${resp.text}`)
+            throw new Error(`Could not register: ${resp.status} ${resp.text}`)
         }
 
         return respText

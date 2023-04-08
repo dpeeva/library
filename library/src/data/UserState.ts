@@ -13,6 +13,7 @@ export class UserState {
             _id: "",
             username: "",
             password: "",
+            passwordRepeated: "",
             email: "",
             jwt: ""
         })
@@ -51,7 +52,12 @@ export class UserState {
     }
 
     onRegister = async () => {
+        // TODO: Add validation for password and email
+        this.authProvider = this.authProvider.setOptions(this.options)
         this.authProvider.userRegister()
+        this.changeOptions({
+            jwt: this.authProvider.data.jwt,
+        })
     }
 
     onLogout = async () => {

@@ -15,7 +15,7 @@ interface Props {
 }
 
 @observer
-class LoginFormPlain extends React.Component<Props> {
+class Container extends React.Component<Props> {
 
     private get store(): Store {
         return this.context as Store
@@ -42,7 +42,7 @@ class LoginFormPlain extends React.Component<Props> {
                         })
                     }}
                     label="Потребителско име"
-                    placeholder="Потребителско име"
+                    placeholder="Въведи имейл"
                     color="secondary"
                     helperText={""}
                     fullWidth
@@ -80,9 +80,9 @@ class LoginFormPlain extends React.Component<Props> {
         </form>
     }
 }
-LoginFormPlain.contextType = StoreContext
+Container.contextType = StoreContext
 
 export const LoginForm = () => {
     const navigate = useNavigate()
-    return <LoginFormPlain navigate={navigate} />
+    return <Container navigate={navigate} />
 }
