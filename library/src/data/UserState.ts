@@ -40,17 +40,16 @@ export class UserState {
         return !!this.authProvider.data.jwt
     }
 
-    onLogin = (e: any) => {
-        e.preventDefault()
-        this.authProvider.userLogin()
+    onLogin = async () => {
+        this.authProvider = this.authProvider.setOptions(this.options)
+        await this.authProvider.userLogin()
     }
 
-    onRegister = (e: any) => {
-        e.preventDefault()
+    onRegister = async () => {
         this.authProvider.userRegister()
     }
 
-    onLogout = () => {
+    onLogout = async () => {
         this.authProvider.userLogout()
     }
 }

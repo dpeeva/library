@@ -8,10 +8,10 @@ export class UserParser {
 
         this.data = {
             _id: parsedResponse._id,
-            jwt: parsedResponse.jwt,
+            jwt: parsedResponse.accessToken,
             email: parsedResponse.email,
-            username: parsedResponse.username,
-            password: parsedResponse.password
+            username: parsedResponse.email,
+            password: "", // parsedResponse.password
         }
     }
 }

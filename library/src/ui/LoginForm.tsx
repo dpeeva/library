@@ -1,4 +1,5 @@
 import * as React from "react"
+// import { redirect } from "react-router-dom"
 import { observer } from "mobx-react"
 import { mui } from "../assets"
 import { StoreContext } from "../context"
@@ -16,10 +17,17 @@ export class LoginForm extends React.Component {
         return this.context as Store
     }
 
+    onSubmit = async (e: any) => {
+        e.preventDefault()
+        const { userState } = this.store
+        await userState.onLogin()
+        // redirect("/")
+    }
+
     render() {
         const { userState } = this.store
 
-        return <form method="POST" onSubmit={userState.onLogin}>
+        return <form method="POST" onSubmit={this.onSubmit}>
             <FormRow>
                 <mui.TextField
                     name="username"
@@ -63,7 +71,6 @@ export class LoginForm extends React.Component {
                     color="warning"
                     size="large"
                     type="submit"
-                // onClick={userState.onLogin}
                 >Потвърди</mui.Button>
             </FormRow>
         </form>

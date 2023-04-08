@@ -39,6 +39,7 @@ export class AuthProvider extends DataProvider<UserData & any, UserRequestType> 
             const parser = new UserParser(raw)
 
             runInAction(() => {
+                this.data._id = parser.data._id
                 this.data.jwt = parser.data.jwt
                 this.data.email = parser.data.email
                 this.data.username = parser.data.username
