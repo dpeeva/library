@@ -3,14 +3,12 @@ import { BookData, BooksRequestType } from "../../domain"
 import { NotificationService } from "../../utils"
 import { IBooksConnection } from "../connections"
 import { BooksParser } from "../parsers"
+import { DataProvider } from "./DataProvider"
 
-export class BooksProvider {
-    data: BookData
-    options: BooksRequestType
+export class BooksProvider extends DataProvider<BookData & any, BooksRequestType> {
 
     constructor(private connection: IBooksConnection, options?: BooksRequestType) {
-        this.data = this.setInitialData()
-        this.options = options || {} as BooksRequestType
+        super("BooksProvider", options)
     }
 
     protected setInitialData() {
@@ -30,6 +28,10 @@ export class BooksProvider {
     }
 
     public async fetch(): Promise<void> {
+        if (!this.options) {
+            return
+        }
+
         try {
             const raw = await this.connection.fetchAllBooks(this.options)
             const parser = new BooksParser(raw)

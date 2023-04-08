@@ -3,7 +3,7 @@ import { Book } from "../domain"
 import { BookStore } from "./BookStore"
 import { IBooksConnection } from "./connections"
 import { IUserConnection } from "./connections/UserConnection"
-import { authProviderFactory, BooksProvider } from "./providers"
+import { authProviderFactory, booksProviderFactory } from "./providers"
 import { UserState } from "./UserState"
 
 export class Store {
@@ -14,8 +14,9 @@ export class Store {
         booksConnection: IBooksConnection,
         userConnection: IUserConnection
     ) {
-        const booksProvider = new BooksProvider(booksConnection)
-        this.bookStore = new BookStore(booksProvider)
+        this.bookStore = new BookStore(
+            booksProviderFactory(booksConnection)
+        )
 
         this.userState = new UserState(
             authProviderFactory(userConnection)
