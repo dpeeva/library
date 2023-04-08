@@ -17,7 +17,6 @@ export class AuthProvider extends DataProvider<UserData & any, UserRequestType> 
             jwt: null,
             email: "",
             username: "",
-            password: ""
         })
     }
 
@@ -57,12 +56,12 @@ export class AuthProvider extends DataProvider<UserData & any, UserRequestType> 
 
         try {
             const raw = await this.connection.logout(this.options)
-            const parser = new UserParser(raw)
 
             runInAction(() => {
-                this.data.jwt = parser.data.jwt
-                this.data.email = parser.data.email
-                this.data.username = parser.data.username
+                this.data._id = ""
+                this.data.jwt = ""
+                this.data.email = ""
+                this.data.username = ""
             })
         } catch (err) {
             NotificationService.getInstance().notify("User logout failed.", "error")
@@ -80,6 +79,7 @@ export class AuthProvider extends DataProvider<UserData & any, UserRequestType> 
             const parser = new UserParser(raw)
 
             runInAction(() => {
+                this.data._id = parser.data._id
                 this.data.jwt = parser.data.jwt
                 this.data.email = parser.data.email
                 this.data.username = parser.data.username

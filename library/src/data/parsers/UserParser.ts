@@ -11,7 +11,6 @@ export class UserParser {
             jwt: parsedResponse.accessToken,
             email: parsedResponse.email,
             username: parsedResponse.email,
-            password: "", // parsedResponse.password
         }
     }
 }

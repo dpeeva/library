@@ -40,10 +40,8 @@ export class UserConnection implements IUserConnection {
             method: "POST",
             headers: {
                 "content-type": "application/json",
-            },
-            body: JSON.stringify({
-                jwt: request.jwt
-            })
+                "X-Authorization": request.jwt
+            }
         })
         const respText = await resp.text()
 

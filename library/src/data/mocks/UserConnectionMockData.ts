@@ -5,7 +5,6 @@ const userData: UserData = {
     jwt: "",
     email: "",
     username: "",
-    password: ""
 }
 
 export const UserConnectionMockData = {

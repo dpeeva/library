@@ -5,5 +5,4 @@ export interface UserData {
     jwt: string | null
     email: string
     username: string
-    password: string
 }

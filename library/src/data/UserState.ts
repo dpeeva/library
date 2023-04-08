@@ -10,6 +10,7 @@ export class UserState {
         private readonly authProviderFactory: (options: UserRequestType) => AuthProvider
     ) {
         this.options = observable({
+            _id: "",
             username: "",
             password: "",
             email: "",
@@ -20,10 +21,11 @@ export class UserState {
 
     @computed get userOptions() {
         return {
+            _id: this.options._id,
             username: this.options.username,
-            password: "",
-            email: "",
-            jwt: ""
+            password: this.options.password,
+            email: this.options.email,
+            jwt: this.options.jwt
         }
     }
 
@@ -43,6 +45,9 @@ export class UserState {
     onLogin = async () => {
         this.authProvider = this.authProvider.setOptions(this.options)
         await this.authProvider.userLogin()
+        this.changeOptions({
+            jwt: this.authProvider.data.jwt,
+        })
     }
 
     onRegister = async () => {
@@ -50,6 +55,6 @@ export class UserState {
     }
 
     onLogout = async () => {
-        this.authProvider.userLogout()
+        await this.authProvider.userLogout()
     }
 }
