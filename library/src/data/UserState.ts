@@ -4,15 +4,18 @@ import { AuthProvider } from "./providers"
 
 export class UserState {
     @observable public options: UserRequestType
+    @observable public authProvider: AuthProvider
 
-    constructor(public readonly provider: AuthProvider) {
-
+    constructor(
+        private readonly authProviderFactory: (options: UserRequestType) => AuthProvider
+    ) {
         this.options = observable({
             username: "",
             password: "",
             email: "",
             jwt: ""
         })
+        this.authProvider = this.authProviderFactory(this.userOptions)
     }
 
     @computed get userOptions() {
@@ -30,38 +33,24 @@ export class UserState {
     }
 
     @computed get userData(): UserData {
-        return this.provider.data
+        return this.authProvider.data
     }
 
     @computed get isAuthenticated() {
-        return !!this.provider.data.jwt
+        return !!this.authProvider.data.jwt
     }
 
     onLogin = (e: any) => {
         e.preventDefault()
-        const formData = new FormData(e.currentTarget)
-        const data = Object.fromEntries(formData)
-
-        const { username, password } = data
-
-        const options = {
-            username: username.toString(),
-            password: password.toString(),
-            email: username.toString(),
-            jwt: ""
-        }
-
-        this.changeOptions(options)
-
-        this.provider.userLogin()
+        this.authProvider.userLogin()
     }
 
     onRegister = (e: any) => {
         e.preventDefault()
-        this.provider.userRegister()
+        this.authProvider.userRegister()
     }
 
     onLogout = () => {
-        this.provider.userLogout()
+        this.authProvider.userLogout()
     }
 }
