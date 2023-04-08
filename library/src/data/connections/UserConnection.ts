@@ -45,7 +45,7 @@ export class UserConnection implements IUserConnection {
                 jwt: request.jwt
             })
         })
-        const respText = await resp.json()
+        const respText = await resp.text()
 
         if (!resp.ok) {
             throw new Error(`Could not logout: ${resp.status} ${resp.text}`)
@@ -66,7 +66,7 @@ export class UserConnection implements IUserConnection {
                 password: request.password
             })
         })
-        const respText = await resp.json()
+        const respText = await resp.text()
 
         if (!resp.ok) {
             throw new Error(`Could not login: ${resp.status} ${resp.text}`)

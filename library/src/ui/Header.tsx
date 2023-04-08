@@ -1,3 +1,4 @@
+import { observer } from "mobx-react"
 import * as React from "react"
 import { NavLink } from "react-router-dom"
 import { logo, mui } from "../assets"
@@ -38,6 +39,7 @@ const Link = mui.styled(NavLink)(({ theme }) => ({
 
 const Logo = mui.styled("img")({})
 
+@observer
 export class Header extends React.Component {
 
     private get store(): Store {
@@ -64,14 +66,15 @@ export class Header extends React.Component {
                     }}>
                         <Link className={({ isActive }) => isActive ? "active" : ""} to="/catalog">Каталог</Link>
 
-                        {isAuthenticated &&
-                            <Link className={({ isActive }) => isActive ? "active" : ""} to="/profile">Профил</Link>
-                        }
-                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/login">Вход</Link>
-                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/register">Регистрация</Link>
-                        {isAuthenticated &&
-                            <Link className={({ isActive }) => isActive ? "active" : ""} to="/logout">Изход</Link>
-                        }
+                        {isAuthenticated
+                            ? <>
+                                <Link className={({ isActive }) => isActive ? "active" : ""} to="/profile">Профил</Link>
+                                <Link className={({ isActive }) => isActive ? "active" : ""} to="/logout">Изход</Link>
+                            </>
+                            : <>
+                                <Link className={({ isActive }) => isActive ? "active" : ""} to="/login">Вход</Link>
+                                <Link className={({ isActive }) => isActive ? "active" : ""} to="/register">Регистрация</Link>
+                            </>}
                     </mui.Stack>
                 </mui.Toolbar>
             </mui.Container>

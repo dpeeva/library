@@ -1,5 +1,5 @@
 import * as React from "react"
-// import { redirect } from "react-router-dom"
+import { NavigateFunction, useNavigate } from "react-router-dom"
 import { observer } from "mobx-react"
 import { mui } from "../assets"
 import { StoreContext } from "../context"
@@ -10,8 +10,12 @@ const FormRow = mui.styled(mui.Box)({
     padding: "8px  0",
 })
 
+interface Props {
+    navigate: NavigateFunction
+}
+
 @observer
-export class LoginForm extends React.Component {
+class LoginFormPlain extends React.Component<Props> {
 
     private get store(): Store {
         return this.context as Store
@@ -21,7 +25,7 @@ export class LoginForm extends React.Component {
         e.preventDefault()
         const { userState } = this.store
         await userState.onLogin()
-        // redirect("/")
+        this.props.navigate("/")
     }
 
     render() {
@@ -76,4 +80,9 @@ export class LoginForm extends React.Component {
         </form>
     }
 }
-LoginForm.contextType = StoreContext
+LoginFormPlain.contextType = StoreContext
+
+export const LoginForm = () => {
+    const navigate = useNavigate()
+    return <LoginFormPlain navigate={navigate} />
+}
