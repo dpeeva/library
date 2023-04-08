@@ -16,7 +16,9 @@ export class BooksConnection implements IBooksConnection {
     }
 
     public async fetchAllBooks(request: BooksRequestType): Promise<string> {
-        //TODO: Add params for pagination: ?${this.getParams(request)}
+        // TODO: Add params for pagination: ?${this.getParams(request)}
+        // TODO: Add sorting
+        // const sorting = "/?sortBy=_createdOn%20desc"
         const resp = await this.ajax.send(`${this.baseUrl}/data/books`, {
             method: "GET",
             headers: {

@@ -44,7 +44,7 @@ export class App extends React.Component {
                         <Routes>
                             <Route path="/" element={<Home />}></Route>
                             <Route path="/catalog" element={<Catalog />}></Route>
-                            <Route path="/details" element={<Details />}></Route>
+                            <Route path="/catalog/:id" element={<Details />}></Route>
                             <Route path="/profile" element={<Profile />}></Route>
                             <Route path="/login" element={<Login />}></Route>
                             <Route path="/logout" element={<Logout />}></Route>
