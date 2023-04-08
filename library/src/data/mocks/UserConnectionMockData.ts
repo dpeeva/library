@@ -1,4 +1,4 @@
-import { UserData } from "../../domain"
+import { UserData } from "../domain"
 
 const userData: UserData = {
     _id: "",

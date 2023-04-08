@@ -1,5 +1,5 @@
 import { observable, runInAction } from "mobx"
-import { BookData, BooksRequestType } from "../../domain"
+import { BookData, BooksRequestType } from "../domain"
 import { NotificationService } from "../../utils"
 import { IBooksConnection } from "../connections"
 import { BooksParser } from "../parsers"

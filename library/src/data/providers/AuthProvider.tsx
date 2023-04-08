@@ -1,5 +1,5 @@
 import { observable, runInAction } from "mobx"
-import { UserData, UserRequestType } from "../../domain"
+import { UserData, UserRequestType } from "../domain"
 import { NotificationService } from "../../utils"
 import { IUserConnection } from "../connections/UserConnection"
 import { UserParser } from "../parsers"

@@ -4,7 +4,7 @@ import { NavigateFunction, useNavigate } from "react-router-dom"
 import { mui, muiIcon } from "../assets"
 import { StoreContext } from "../context"
 import { Store } from "../data"
-import { Book } from "../domain"
+import { Book } from "../data/domain"
 
 const UserActions = mui.styled(mui.Box)(({ theme }) => ({
     padding: "4px",

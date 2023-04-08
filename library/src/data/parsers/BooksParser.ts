@@ -1,5 +1,5 @@
 import { IObservableArray } from "mobx"
-import { Book, BookData } from "../../domain"
+import { Book, BookData } from "../domain"
 
 export class BooksParser {
     public data: BookData

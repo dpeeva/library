@@ -2,7 +2,6 @@ import * as React from "react"
 import { useParams } from "react-router-dom"
 import { mui, muiIcon } from "../../assets"
 import { StoreContext } from "../../context"
-import { Book } from "../../domain"
 import { PageContainer, SectionHeading, SectionWrap } from ".."
 
 const BookDetails = mui.styled(mui.Box)(({ theme }) => ({

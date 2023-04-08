@@ -1,5 +1,5 @@
 import { action, computed, observable } from "mobx"
-import { UserData, UserRequestType } from "../domain"
+import { UserData, UserRequestType } from "./domain"
 import { AuthProvider } from "./providers"
 
 export class UserState {

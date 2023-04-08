@@ -1,4 +1,4 @@
-import { UserRequestType } from "../../domain"
+import { UserRequestType } from "../domain"
 import { AjaxService } from "../../services"
 
 export interface IUserConnection {

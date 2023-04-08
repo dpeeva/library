@@ -1,4 +1,4 @@
-import { BooksRequestType } from "../../domain"
+import { BooksRequestType } from "../domain"
 import { AjaxService } from "../../services"
 
 export interface IBooksConnection {

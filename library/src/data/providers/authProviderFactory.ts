@@ -1,4 +1,4 @@
-import { UserRequestType } from "../../domain"
+import { UserRequestType } from "../domain"
 import { IUserConnection } from "../connections"
 import { AuthProvider } from "./AuthProvider"
 

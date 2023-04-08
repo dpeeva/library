@@ -1,4 +1,4 @@
-import { BooksRequestType } from "../../domain"
+import { BooksRequestType } from "../domain"
 import { IBooksConnection } from "../connections"
 import { BooksConnectionMockData } from "./BooksConnectionMockData"
 

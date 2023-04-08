@@ -1,5 +1,5 @@
 import { action, computed, observable } from "mobx"
-import { Book, BooksRequestType } from "../domain"
+import { Book, BooksRequestType } from "./domain"
 import { BooksProvider } from "./providers"
 
 export class BookStore {
@@ -75,7 +75,7 @@ export class BookStore {
         this.isSubmiting = true
         this.booksProvider = this.booksProvider.setOptions(this.options)
         await this.booksProvider.addBook()
-        // TODO: rerender current books list
+        // TODO: rerender current books list to view newly added books
         this.isCreateModalOpen = false
     }
 }
