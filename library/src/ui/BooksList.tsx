@@ -52,10 +52,12 @@ export const BooksList: React.FunctionComponent = () => {
                                 {book.title}
                             </mui.Typography>
                             <mui.Typography variant="body1" mt={1}>
-                                {book.author.map(a => a).join(", ")}
+                                {/* {book.author.map(a => a).join(", ")} */}
+                                {book.author}
                             </mui.Typography>
                             <mui.Typography mt={1}>
-                                Publisher: {book.publisher.map(p => p).join(", ")}
+                                Publisher: {book.publisher}
+                                {/* {book.publisher.map(p => p).join(", ")} */}
                             </mui.Typography>
                             {book.volume && <mui.Typography mt={1}>
                                 Volume: {book.volume}

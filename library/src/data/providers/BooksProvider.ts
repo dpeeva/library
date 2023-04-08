@@ -38,7 +38,26 @@ export class BooksProvider extends DataProvider<BookData & any, BooksRequestType
 
             runInAction(() => {
                 this.data.books.replace(parser.data.books)
-                this.data.totalRows = parser.data.totalRows
+                // this.data.totalRows = parser.data.totalRows
+            })
+        } catch (err) {
+            NotificationService.getInstance().notify("Books could not be loaded.", "error")
+            throw err
+        }
+    }
+
+    public async addBook(): Promise<void> {
+        if (!this.options) {
+            return
+        }
+
+        try {
+            const raw = await this.connection.createBook(this.options)
+            const parser = new BooksParser(raw)
+
+            runInAction(() => {
+                this.data.books.replace([...this.data.books, ...parser.data.books])
+                // this.data.totalRows = parser.data.totalRows
             })
         } catch (err) {
             NotificationService.getInstance().notify("Books could not be loaded.", "error")

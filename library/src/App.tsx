@@ -13,7 +13,7 @@ const Wrapper = mui.styled(mui.Box)({
 })
 
 export class App extends React.Component {
-    private store: Store
+    private store?: Store
     private readonly booksConnection: IBooksConnection
     private readonly userConnection: IUserConnection
 
@@ -21,12 +21,18 @@ export class App extends React.Component {
         super(props)
         const ajax = new AjaxService()
         const baseUrl = "http://localhost:3030"
-        this.booksConnection = new BooksConnection(`${baseUrl}/books`, ajax)
-        this.userConnection = new UserConnection(`${baseUrl}/users`, ajax)
+        this.booksConnection = new BooksConnection(`${baseUrl}`, ajax)
+        this.userConnection = new UserConnection(`${baseUrl}`, ajax)
+        this.store = undefined
+        this.init()
+    }
+
+    async init(): Promise<void> {
         this.store = new Store(
             this.booksConnection,
             this.userConnection
         )
+        // await this.store.bookStore.booksProvider.fetch()
     }
 
     render() {

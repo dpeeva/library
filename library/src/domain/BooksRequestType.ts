@@ -1,8 +1,18 @@
 /* istanbul ignore file */
 
-import { Pagination } from "./Pagination"
+import { Cover } from "./Book"
+// import { Pagination } from "./Pagination"
 
 export type BooksRequestType = {
-    id?: number
-    pagination: Pagination
+    userToken?: string
+    _id?: string
+    title?: string
+    author?: string
+    volume?: string
+    publisher?: string
+    yearOfRelease?: string
+    pagesCount?: string
+    cover?: Cover | string
+    coverImage?: string
+    // pagination: Pagination
 }

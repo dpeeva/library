@@ -1,13 +1,17 @@
 /* istanbul ignore file */
 
+export type Cover = "softcover" | "hardcover"
+
 export interface Book {
-    id: number
+    _id: string
+    _ownerId: string
+    _createdOn: string
     title: string
-    author: string[]
-    volume?: number
-    publisher: string[]
-    yearOfRelease: number
-    pagesCount: number
-    cover: "softcover" | "hardcover",
+    author: string
+    volume?: string
+    publisher: string
+    yearOfRelease: string
+    pagesCount: string
+    cover: Cover
     coverImage?: string
 }

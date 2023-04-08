@@ -11,10 +11,10 @@ describe("BooksProvider", () => {
         connection = new BooksConnectionMock()
         connection.fetchAllBooks = jest.fn(connection.fetchAllBooks)
         instance = new BooksProvider(connection, {
-            pagination: {
-                page: 1,
-                pageSize: 50
-            }
+            // pagination: {
+            //     page: 1,
+            //     pageSize: 50
+            // }
         })
     })
 
