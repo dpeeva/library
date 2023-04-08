@@ -16,7 +16,13 @@ export class BooksConnection implements IBooksConnection {
     }
 
     public async fetchAllBooks(request: BooksRequestType): Promise<string> {
-        const resp = await this.ajax.send(`${this.baseUrl}/data/books?${this.getParams(request)}`)
+        //TODO: Add params for pagination: ?${this.getParams(request)}
+        const resp = await this.ajax.send(`${this.baseUrl}/data/books`, {
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+            },
+        })
         const respText = await resp.text()
 
         if (!resp.ok) {

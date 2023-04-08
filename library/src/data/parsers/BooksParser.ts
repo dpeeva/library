@@ -6,9 +6,10 @@ export class BooksParser {
 
     constructor(response: string) {
         const parsedResponse = JSON.parse(response)
+        const books = Array.isArray(parsedResponse) ? parsedResponse : [parsedResponse]
 
         this.data = {
-            books: [parsedResponse] as IObservableArray<Book>,
+            books: books as IObservableArray<Book>,
             totalRows: parsedResponse.length
         }
     }

@@ -75,6 +75,7 @@ export class BookStore {
         this.isSubmiting = true
         this.booksProvider = this.booksProvider.setOptions(this.options)
         await this.booksProvider.addBook()
+        // TODO: rerender current books list
         this.isCreateModalOpen = false
     }
 }

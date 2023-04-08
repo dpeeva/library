@@ -5,6 +5,10 @@ import { StoreContext } from "../../context"
 import { Store } from "../../data"
 import { BooksList, CreateModal, PageContainer, SectionHeading, SectionWrap } from ".."
 
+const SectionAddBook = mui.styled(mui.Box)({
+    padding: "0 0 40px",
+})
+
 @observer
 export class Catalog extends React.Component {
 
@@ -14,6 +18,7 @@ export class Catalog extends React.Component {
 
     render() {
         const { bookStore, userState } = this.store
+        const books = bookStore.books
 
         return <PageContainer data-testid="library-app-catalog">
             <SectionWrap>
@@ -21,11 +26,13 @@ export class Catalog extends React.Component {
                     Каталог
                 </SectionHeading>
                 {userState.isAuthenticated &&
-                    <mui.Button
-                        variant="contained"
-                        color="warning"
-                        onClick={bookStore.openCreateModal}
-                    >Добави книга</mui.Button>
+                    <SectionAddBook>
+                        <mui.Button
+                            variant="contained"
+                            color="warning"
+                            onClick={bookStore.openCreateModal}
+                        >Добави книга</mui.Button>
+                    </SectionAddBook>
                 }
                 <CreateModal />
                 <BooksList />

@@ -28,12 +28,8 @@ export class BooksProvider extends DataProvider<BookData & any, BooksRequestType
     }
 
     public async fetch(): Promise<void> {
-        if (!this.options) {
-            return
-        }
-
         try {
-            const raw = await this.connection.fetchAllBooks(this.options)
+            const raw = await this.connection.fetchAllBooks({})
             const parser = new BooksParser(raw)
 
             runInAction(() => {
