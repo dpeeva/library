@@ -17,7 +17,10 @@ export class UserConnection implements IUserConnection {
     }
 
     public async login(request: UserRequestType): Promise<string> {
-        const resp = await this.ajax.send(`${this.baseUrl}/users/login?${this.getParams(request)}`)
+        const resp = await this.ajax.send(`${this.baseUrl}/users/login`, {
+            method: "POST",
+            body: JSON.stringify(request)
+        })
         const respText = await resp.text()
 
         if (!resp.ok) {
@@ -28,7 +31,10 @@ export class UserConnection implements IUserConnection {
     }
 
     public async logout(request: UserRequestType): Promise<string> {
-        const resp = await this.ajax.send(`${this.baseUrl}/users/logout?jwt=${request.jwt}`)
+        const resp = await this.ajax.send(`${this.baseUrl}/users/logout`, {
+            method: "POST",
+            body: JSON.stringify(request)
+        })
         const respText = await resp.text()
 
         if (!resp.ok) {
@@ -39,7 +45,10 @@ export class UserConnection implements IUserConnection {
     }
 
     public async register(request: UserRequestType): Promise<string> {
-        const resp = await this.ajax.send(`${this.baseUrl}/users/register?${this.getParams(request)}`)
+        const resp = await this.ajax.send(`${this.baseUrl}/users/register`, {
+            method: "POST",
+            body: JSON.stringify(request)
+        })
         const respText = await resp.text()
 
         if (!resp.ok) {
