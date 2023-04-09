@@ -43,10 +43,15 @@ export class UserState {
         return !!this.authProvider.data.jwt
     }
 
+    @action isOwner(ownerId: string): boolean {
+        return this.authProvider.data._id === ownerId
+    }
+
     onLogin = async () => {
         this.authProvider = this.authProvider.setOptions(this.options)
         await this.authProvider.userLogin()
         this.changeOptions({
+            _id: this.authProvider.data._id,
             jwt: this.authProvider.data.jwt,
         })
     }

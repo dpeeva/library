@@ -12,9 +12,9 @@ export class BookStore {
     constructor(
         private readonly booksProviderFactory: (options: BooksRequestType) => BooksProvider
     ) {
-        this.userBooks = []
         this.options = observable({
             userToken: "",
+            _ownerId: "",
             _id: "",
             title: "",
             author: "",
@@ -28,18 +28,18 @@ export class BookStore {
         this.booksProvider = this.booksProviderFactory(this.options)
     }
 
-    @computed get bookOptions() {
-        return {
-            _id: this.options._id,
-            title: this.options.title,
-            author: this.options.author,
-            volume: this.options.volume,
-            publisher: this.options.publisher,
-            yearOfRelease: this.options.yearOfRelease,
-            pagesCount: this.options.pagesCount,
-            cover: this.options.cover,
-        }
-    }
+    // @computed get bookOptions() {
+    //     return {
+    //         _id: this.options._id,
+    //         title: this.options.title,
+    //         author: this.options.author,
+    //         volume: this.options.volume,
+    //         publisher: this.options.publisher,
+    //         yearOfRelease: this.options.yearOfRelease,
+    //         pagesCount: this.options.pagesCount,
+    //         cover: this.options.cover,
+    //     }
+    // }
 
     @action public changeOptions(options: Partial<BooksRequestType>) {
         Object.assign(this.options, options)
@@ -55,6 +55,7 @@ export class BookStore {
         this.options = observable({
             userToken: "",
             _id: "",
+            _ownerId: "",
             title: "",
             author: "",
             volume: "",

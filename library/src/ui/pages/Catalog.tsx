@@ -9,8 +9,12 @@ const SectionAddBook = mui.styled(mui.Box)({
     padding: "0 0 40px",
 })
 
+interface Props {
+    navigate: NavigateFunction
+}
+
 @observer
-export class Catalog extends React.Component {
+export class Container extends React.Component<Props> {
 
     private get store(): Store {
         return this.context as Store
@@ -18,7 +22,10 @@ export class Catalog extends React.Component {
 
     render() {
         const { bookStore, userState } = this.store
-        const books = bookStore.books
+
+        if (!userState.isAuthenticated) {
+            return <Navigate to="/" />
+        }
 
         return <PageContainer data-testid="library-app-catalog">
             <SectionWrap>
@@ -40,4 +47,9 @@ export class Catalog extends React.Component {
         </PageContainer>
     }
 }
-Catalog.contextType = StoreContext
+Container.contextType = StoreContext
+
+export const Catalog = () => {
+    const navigate = useNavigate()
+    return <Container navigate={navigate} />
+}

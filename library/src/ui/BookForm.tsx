@@ -142,8 +142,8 @@ class Container extends React.Component<Props> {
                             coverImage: e.target.value
                         })
                     }}
-                    label="Корица"
-                    placeholder="Въведи линк към корицата"
+                    label="Изображение на корицата"
+                    placeholder="Въведи линк"
                     color="secondary"
                     helperText={""}
                     fullWidth

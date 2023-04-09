@@ -35,7 +35,6 @@ export class App extends React.Component {
             this.bookDetailsConnection,
             this.userConnection
         )
-        // await this.store.bookStore.booksProvider.fetch()
     }
 
     render() {

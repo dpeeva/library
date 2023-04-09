@@ -5,6 +5,7 @@ import { Cover } from "./Book"
 
 export type BooksRequestType = {
     userToken?: string
+    _ownerId?: string
     _id?: string
     title?: string
     author?: string

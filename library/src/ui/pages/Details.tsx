@@ -16,6 +16,7 @@ const UserActions = mui.styled(mui.Box)(({ theme }) => ({
 
 export const Details = () => {
     const { bookDetails } = React.useContext(StoreContext).bookDetailsStore
+    const { userState } = React.useContext(StoreContext)
 
     return <PageContainer data-testid="library-app-details">
         <SectionWrap>
@@ -72,15 +73,18 @@ export const Details = () => {
                         </mui.Typography>}
                     </mui.CardContent>
 
-                    <mui.CardActions sx={{
-                        paddingBottom: "16px"
-                    }}>
-                        <mui.Button
-                            color="warning"
-                            variant="contained"
-                            onClick={() => { }}
-                        >Редактирай</mui.Button>
-                    </mui.CardActions>
+                    {userState.isAuthenticated && userState.isOwner(bookDetails._ownerId) &&
+                        <mui.CardActions sx={{
+                            paddingBottom: "16px"
+                        }}>
+                            <mui.Button
+                                color="warning"
+                                variant="contained"
+                                onClick={() => { }}
+                            >Редактирай</mui.Button>
+                        </mui.CardActions>
+                    }
+
                 </mui.Card>}
             </BookDetails>
         </SectionWrap>

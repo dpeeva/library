@@ -23,8 +23,11 @@ class Container extends React.Component<Props> {
 
     onSubmit = async (e: any) => {
         e.preventDefault()
-        const { userState } = this.store
+        const { bookStore, userState } = this.store
         await userState.onLogin()
+        bookStore.changeOptions({
+            _ownerId: userState.options._id
+        })
         this.props.navigate("/")
     }
 

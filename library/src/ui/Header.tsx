@@ -64,17 +64,17 @@ export class Header extends React.Component {
                         flexGrow: 1,
                         justifyContent: "end"
                     }}>
-                        <Link className={({ isActive }) => isActive ? "active" : ""} to="/catalog">Каталог</Link>
-
                         {isAuthenticated
                             ? <>
+                                <Link className={({ isActive }) => isActive ? "active" : ""} to="/catalog">Каталог</Link>
                                 <Link className={({ isActive }) => isActive ? "active" : ""} to="/profile">Профил</Link>
                                 <Link className={({ isActive }) => isActive ? "active" : ""} to="/logout">Изход</Link>
                             </>
                             : <>
                                 <Link className={({ isActive }) => isActive ? "active" : ""} to="/login">Вход</Link>
                                 <Link className={({ isActive }) => isActive ? "active" : ""} to="/register">Регистрация</Link>
-                            </>}
+                            </>
+                        }
                     </mui.Stack>
                 </mui.Toolbar>
             </mui.Container>
