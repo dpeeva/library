@@ -1,7 +1,7 @@
 import * as React from "react"
 import { observer } from "mobx-react"
 import { StoreContext } from "../../context"
-import { BooksList, HeroUnit, PageContainer, SectionHeading, SectionWrap } from ".."
+import { BooksList, IntroUnit, PageContainer, SectionHeading, SectionWrap } from ".."
 import { Store } from "../../data"
 
 @observer
@@ -16,7 +16,7 @@ export class Home extends React.Component {
         const books = bookStore.books
 
         return <PageContainer data-testid="library-app-home">
-            <HeroUnit />
+            <IntroUnit />
             <SectionWrap>
                 <SectionHeading variant="h4">
                     Последно добавени
