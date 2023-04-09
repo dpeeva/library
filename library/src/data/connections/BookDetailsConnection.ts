@@ -1,7 +1,7 @@
 import { AjaxService } from "../../services"
 
 export interface IBookDetailsConnection {
-    fetchById(id: string): Promise<string>
+    getById(id: string): Promise<string>
 }
 
 export class BookDetailsConnection implements IBookDetailsConnection {
@@ -13,7 +13,7 @@ export class BookDetailsConnection implements IBookDetailsConnection {
         this.baseUrl = baseUrl
     }
 
-    public async fetchById(id: string): Promise<string> {
+    public async getById(id: string): Promise<string> {
         const resp = await this.ajax.send(`${this.baseUrl}/data/books/${id}`, {
             method: "GET",
             headers: {

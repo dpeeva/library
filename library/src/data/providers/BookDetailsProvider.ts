@@ -30,8 +30,7 @@ export class BookDetailsProvider extends DataProvider<Book & any, BookDetailsReq
     public setOptions(options: BookDetailsRequestType): this {
         const provider = new BookDetailsProvider(this.connection, options) as this
         provider.data = observable({
-            books: this.data.books,
-            totalRows: this.data.totalRows
+            _id: this.data._id,
         })
         return provider
     }
@@ -42,14 +41,14 @@ export class BookDetailsProvider extends DataProvider<Book & any, BookDetailsReq
         }
 
         try {
-            const raw = await this.connection.fetchById(this.options._id)
+            const raw = await this.connection.getById(this.options._id)
             const parser = new BookDetailsParser(raw)
 
             runInAction(() => {
                 this.data = parser.data
             })
         } catch (err) {
-            NotificationService.getInstance().notify("Books could not be loaded.", "error")
+            NotificationService.getInstance().notify("Book could not be loaded.", "error")
             throw err
         }
     }

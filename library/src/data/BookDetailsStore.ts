@@ -36,4 +36,10 @@ export class BookDetailsStore {
             _id: "",
         })
     }
+
+    @action getById = async (id: string) => {
+        this.bookDetailsProvider = this.bookDetailsProvider.setOptions(this.options)
+        debugger
+        await this.bookDetailsProvider.fetch()
+    }
 }

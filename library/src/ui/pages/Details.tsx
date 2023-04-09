@@ -1,5 +1,4 @@
 import * as React from "react"
-import { useParams } from "react-router-dom"
 import { mui, muiIcon } from "../../assets"
 import { StoreContext } from "../../context"
 import { PageContainer, SectionHeading, SectionWrap } from ".."
@@ -16,9 +15,7 @@ const UserActions = mui.styled(mui.Box)(({ theme }) => ({
 }))
 
 export const Details = () => {
-    const { id } = useParams()
     const { bookDetails } = React.useContext(StoreContext).bookDetailsStore
-    debugger
 
     return <PageContainer data-testid="library-app-details">
         <SectionWrap>
@@ -27,7 +24,7 @@ export const Details = () => {
             </SectionHeading>
 
             <BookDetails>
-                {bookDetails && <mui.Card>
+                {bookDetails && <mui.Card sx={{ maxWidth: "600px" }}>
                     <mui.CardMedia
                         component="img"
                         alt={`${bookDetails.title}`}
@@ -44,14 +41,14 @@ export const Details = () => {
                             </mui.IconButton>
                         </mui.Tooltip>
 
-                        <mui.Tooltip
+                        {/* <mui.Tooltip
                             title="Добави в любими"
                             placement="top"
                         >
                             <mui.IconButton color="inherit" onClick={() => { }}>
                                 <muiIcon.FavoriteBorder />
                             </mui.IconButton>
-                        </mui.Tooltip>
+                        </mui.Tooltip> */}
                     </UserActions>
 
                     <mui.CardContent>
@@ -64,11 +61,14 @@ export const Details = () => {
                         <mui.Typography variant="body1" mt={1}>
                             {bookDetails.author}
                         </mui.Typography>
-                        <mui.Typography mt={1}>
+                        {bookDetails.publisher && <mui.Typography mt={1}>
                             Publisher: {bookDetails.publisher}
-                        </mui.Typography>
+                        </mui.Typography>}
                         {bookDetails.volume && <mui.Typography mt={1}>
                             Volume: {bookDetails.volume}
+                        </mui.Typography>}
+                        {bookDetails.yearOfRelease && <mui.Typography mt={1}>
+                            Година на издаване: {bookDetails.yearOfRelease}
                         </mui.Typography>}
                     </mui.CardContent>
 

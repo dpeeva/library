@@ -4,7 +4,6 @@ import { observer } from "mobx-react"
 import { mui } from "../assets"
 import { StoreContext } from "../context"
 import { Store } from "../data"
-import { Cover } from "../data/domain"
 
 const FormRow = mui.styled(mui.Box)({
     display: "flex",

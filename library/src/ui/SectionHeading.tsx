@@ -1,4 +1,5 @@
-import * as React from "react"
+/* istanbul ignore file */
+
 import { mui } from "../assets"
 
 export const SectionHeading = mui.styled(mui.Typography)({

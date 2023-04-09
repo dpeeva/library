@@ -1,23 +1,23 @@
 import * as React from "react"
 import { mui, muiIcon, muiLab, hero, intro_1, intro_2, intro_3, intro_4 } from "../assets"
 
-const TabPanel = mui.styled(muiLab.TabPanel)(({ }) => ({
+const TabPanel = mui.styled(muiLab.TabPanel)({
     height: "320px",
-}))
+})
 
-const TabContent = mui.styled(mui.Stack)(({ theme }) => ({
+const TabContent = mui.styled(mui.Stack)({
     justifyContent: "center",
     alignItems: "center",
-}))
+})
 
 const Hero = mui.styled("img")({
     marginRight: "40px",
 })
 
-const HeroContent = mui.styled(mui.Box)(({ theme }) => ({
+const HeroContent = mui.styled(mui.Box)({
     width: "100%",
     maxWidth: "600px",
-}))
+})
 
 const Page = mui.styled(mui.Tab)(({ theme }) => ({
     position: "relative",
