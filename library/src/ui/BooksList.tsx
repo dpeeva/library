@@ -26,16 +26,16 @@ export class Container extends React.Component<Props> {
     }
 
     handleViewMore = async (id: string) => {
-        const { bookDetailsStore, userState } = this.store
+        const { bookDetailsStore } = this.store
         bookDetailsStore.changeOptions({
             _id: id
         })
-        await bookDetailsStore.getById(id)
+        await bookDetailsStore.getById()
         this.props.navigate(`/catalog/:${id}`)
     }
 
     render() {
-        const { userState } = this.store
+        const { bookDetailsStore, userState } = this.store
         const isAuthenticated = userState.isAuthenticated
 
         return <mui.Grid container spacing={8} data-testid="library-app-booklist" >

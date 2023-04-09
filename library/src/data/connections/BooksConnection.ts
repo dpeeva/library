@@ -55,7 +55,7 @@ export class BooksConnection implements IBooksConnection {
     }
 
     public async createBook(request: BooksRequestType): Promise<string> {
-        if (!request.userToken) {
+        if (!request.jwt) {
             return ""
         }
 
@@ -63,7 +63,7 @@ export class BooksConnection implements IBooksConnection {
             method: "POST",
             headers: {
                 "content-type": "application/json",
-                "X-Authorization": request.userToken,
+                "X-Authorization": request.jwt,
             },
             body: JSON.stringify({
                 title: request.title,

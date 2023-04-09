@@ -52,4 +52,21 @@ export class BookDetailsProvider extends DataProvider<Book & any, BookDetailsReq
             throw err
         }
     }
+
+    public async delete(): Promise<void> {
+        if (!this.options) {
+            return
+        }
+
+        try {
+            await this.connection.deleteById(this.options)
+
+            runInAction(() => {
+                this.data = this.setInitialData()
+            })
+        } catch (err) {
+            NotificationService.getInstance().notify("Book could not be deleted.", "error")
+            throw err
+        }
+    }
 }

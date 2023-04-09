@@ -4,7 +4,7 @@ import { Cover } from "./Book"
 // import { Pagination } from "./Pagination"
 
 export type BooksRequestType = {
-    userToken?: string
+    jwt?: string
     _ownerId?: string
     _id?: string
     title?: string

@@ -24,8 +24,9 @@ class Container extends React.Component<Props> {
     onSubmit = async (e: any) => {
         e.preventDefault()
         const { bookStore, userState } = this.store
+        // TODO: check why needed to set jwt here explicitly
         bookStore.changeOptions({
-            userToken: userState.options.jwt
+            jwt: userState.options.jwt
         })
         await bookStore.addBook()
     }

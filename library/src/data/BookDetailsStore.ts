@@ -10,14 +10,16 @@ export class BookDetailsStore {
         private readonly bookDetailsProviderFactory: (options: BookDetailsRequestType) => BookDetailsProvider
     ) {
         this.options = observable({
-            _id: ""
+            _id: "",
+            jwt: ""
         })
         this.bookDetailsProvider = this.bookDetailsProviderFactory(this.options)
     }
 
     @computed get bookDetailsOptions() {
         return {
-            _id: this.options._id
+            _id: this.options._id,
+            jwt: this.options.jwt
         }
     }
 
@@ -37,8 +39,12 @@ export class BookDetailsStore {
         })
     }
 
-    @action getById = async (id: string) => {
+    @action getById = async () => {
         this.bookDetailsProvider = this.bookDetailsProvider.setOptions(this.options)
         await this.bookDetailsProvider.fetch()
+    }
+
+    @action deleteById = async () => {
+        await this.bookDetailsProvider.delete()
     }
 }

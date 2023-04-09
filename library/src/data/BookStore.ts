@@ -14,7 +14,7 @@ export class BookStore {
         private readonly userBooksProviderFactory: (options: BooksRequestType) => UserBooksProvider
     ) {
         this.options = observable({
-            userToken: "",
+            jwt: "",
             _ownerId: "",
             _id: "",
             title: "",
@@ -61,7 +61,7 @@ export class BookStore {
 
     @action public resetOptions = () => {
         this.options = observable({
-            userToken: "",
+            jwt: "",
             _id: "",
             _ownerId: "",
             title: "",
