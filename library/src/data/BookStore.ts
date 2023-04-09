@@ -1,16 +1,17 @@
 import { action, computed, observable } from "mobx"
 import { Book, BooksRequestType } from "./domain"
-import { BooksProvider } from "./providers"
+import { BooksProvider, UserBooksProvider } from "./providers"
 
 export class BookStore {
     @observable public options: BooksRequestType
     @observable public booksProvider: BooksProvider
-    @observable public userBooks: Book[]
+    @observable public userBooksProvider: UserBooksProvider
     @observable public isCreateModalOpen = false;
     @observable public isSubmiting = false
 
     constructor(
-        private readonly booksProviderFactory: (options: BooksRequestType) => BooksProvider
+        private readonly booksProviderFactory: (options: BooksRequestType) => BooksProvider,
+        private readonly userBooksProviderFactory: (options: BooksRequestType) => UserBooksProvider
     ) {
         this.options = observable({
             userToken: "",
@@ -26,6 +27,7 @@ export class BookStore {
             coverImage: "",
         })
         this.booksProvider = this.booksProviderFactory(this.options)
+        this.userBooksProvider = this.userBooksProviderFactory(this.options)
     }
 
     // @computed get bookOptions() {
@@ -48,6 +50,12 @@ export class BookStore {
     @computed get books(): Book[] {
         return this.booksProvider.data.books.length
             ? this.booksProvider.data.books
+            : []
+    }
+
+    @computed get userBooks(): Book[] {
+        return this.userBooksProvider.data.books.length
+            ? this.userBooksProvider.data.books
             : []
     }
 

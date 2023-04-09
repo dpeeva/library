@@ -1,7 +1,7 @@
 import { BookStore } from "./BookStore"
 import { BookDetailsStore } from "./BookDetailsStore"
 import { IBookDetailsConnection, IBooksConnection, IUserConnection } from "./connections"
-import { authProviderFactory, bookDetailsProviderFactory, booksProviderFactory } from "./providers"
+import { authProviderFactory, bookDetailsProviderFactory, booksProviderFactory, userBooksProviderFactory } from "./providers"
 import { UserState } from "./UserState"
 
 export class Store {
@@ -15,7 +15,8 @@ export class Store {
         userConnection: IUserConnection
     ) {
         this.bookStore = new BookStore(
-            booksProviderFactory(booksConnection)
+            booksProviderFactory(booksConnection),
+            userBooksProviderFactory(booksConnection)
         )
 
         this.bookDetailsStore = new BookDetailsStore(

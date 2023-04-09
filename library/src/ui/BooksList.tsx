@@ -15,6 +15,7 @@ const UserActions = mui.styled(mui.Box)(({ theme }) => ({
 
 interface Props {
     navigate: NavigateFunction
+    books: Book[]
 }
 
 @observer
@@ -24,17 +25,25 @@ export class Container extends React.Component<Props> {
         return this.context as Store
     }
 
-    handleViewMore = (id: string) => {
+    handleViewMore = async (id: string) => {
+        const { bookDetailsStore, userState } = this.store
+        bookDetailsStore.changeOptions({
+            _id: id
+        })
+        await bookDetailsStore.getById(id)
         this.props.navigate(`/catalog/:${id}`)
     }
 
     render() {
-        const { bookStore } = this.store
+        const { userState } = this.store
+        const isAuthenticated = userState.isAuthenticated
 
         return <mui.Grid container spacing={8} data-testid="library-app-booklist" >
-            {bookStore.books.map(
-                (book: Book, index: number) => (
-                    <mui.Grid key={`book-${index}`} item xs={6} md={4} lg={3}>
+            {this.props.books.map(
+                (book: Book, index: number) => {
+                    const isOwner = userState.isOwner(book._ownerId)
+
+                    return <mui.Grid key={`book-${index}`} item xs={6} md={4} lg={3}>
                         <mui.Card>
                             <mui.CardMedia
                                 component="img"
@@ -52,14 +61,23 @@ export class Container extends React.Component<Props> {
                                     </mui.IconButton>
                                 </mui.Tooltip>
 
-                                <mui.Tooltip
+                                {isAuthenticated && isOwner && <mui.Tooltip
+                                    title="Премахни от каталога"
+                                    placement="top"
+                                >
+                                    <mui.IconButton color="inherit" onClick={() => { }}>
+                                        <muiIcon.Delete />
+                                    </mui.IconButton>
+                                </mui.Tooltip>}
+
+                                {/* <mui.Tooltip
                                     title="Добави в любими"
                                     placement="top"
                                 >
                                     <mui.IconButton color="inherit" onClick={() => { }}>
                                         <muiIcon.FavoriteBorder />
                                     </mui.IconButton>
-                                </mui.Tooltip>
+                                </mui.Tooltip> */}
                             </UserActions>
 
                             <mui.CardContent>
@@ -72,12 +90,9 @@ export class Container extends React.Component<Props> {
                                 <mui.Typography variant="body1" mt={1}>
                                     {book.author}
                                 </mui.Typography>
-                                <mui.Typography mt={1}>
-                                    Publisher: {book.publisher}
-                                </mui.Typography>
-                                {book.volume && <mui.Typography mt={1}>
-                                    Volume: {book.volume}
-                                </mui.Typography>}
+                                {/* <mui.Typography variant="body1" mt={1}>
+                                    {book._ownerId}
+                                </mui.Typography> */}
                             </mui.CardContent>
 
                             <mui.CardActions sx={{
@@ -93,14 +108,14 @@ export class Container extends React.Component<Props> {
                             </mui.CardActions>
                         </mui.Card>
                     </mui.Grid>
-                )
+                }
             )}
         </mui.Grid>
     }
 }
 Container.contextType = StoreContext
 
-export const BooksList = () => {
+export const BooksList = (props: any) => {
     const navigate = useNavigate()
-    return <Container navigate={navigate} />
+    return <Container navigate={navigate} books={props.books} />
 }

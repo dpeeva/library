@@ -3,6 +3,7 @@ import { AjaxService } from "../../services"
 
 export interface IBooksConnection {
     fetchAllBooks(request: BooksRequestType): Promise<string>
+    fetchUserBooks(request: BooksRequestType): Promise<string>
     createBook(request: BooksRequestType): Promise<string>
 }
 
@@ -29,6 +30,25 @@ export class BooksConnection implements IBooksConnection {
 
         if (!resp.ok) {
             throw new Error(`Could not fetch books: ${resp.status} ${resp.text}`)
+        }
+
+        return respText
+    }
+
+    public async fetchUserBooks(request: BooksRequestType): Promise<string> {
+        if (!request._ownerId) {
+            return ""
+        }
+
+        const query = encodeURIComponent(`_ownerId="${request._ownerId}"`)
+
+        const resp = await fetch(`${this.baseUrl}/data/books/?where=${query}`, {
+            method: "GET",
+        })
+        const respText = await resp.text()
+
+        if (!resp.ok) {
+            throw new Error(`Could not fetch books for this user: ${resp.status} ${resp.text}`)
         }
 
         return respText

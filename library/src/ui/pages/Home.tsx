@@ -21,7 +21,7 @@ export class Home extends React.Component {
                 <SectionHeading variant="h4">
                     Последно добавени
                 </SectionHeading>
-                <BooksList />
+                <BooksList books={books} />
             </SectionWrap>
         </PageContainer>
     }

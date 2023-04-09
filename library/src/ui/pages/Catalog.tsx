@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Navigate, NavigateFunction, useNavigate } from "react-router-dom"
 import { observer } from "mobx-react"
 import { mui } from "../../assets"
 import { StoreContext } from "../../context"
@@ -27,6 +28,11 @@ export class Container extends React.Component<Props> {
             return <Navigate to="/" />
         }
 
+        bookStore.changeOptions({
+            _ownerId: userState.options._id
+        })
+        const books = bookStore.userBooks
+
         return <PageContainer data-testid="library-app-catalog">
             <SectionWrap>
                 <SectionHeading variant="h4">
@@ -42,7 +48,13 @@ export class Container extends React.Component<Props> {
                     </SectionAddBook>
                 }
                 <CreateModal />
-                <BooksList />
+                <SectionHeading variant="h4">
+                    Книги в каталога
+                </SectionHeading>
+                {books.length
+                    ? <BooksList books={books} />
+                    : "Все още нямате добавени книги в каталога"
+                }
             </SectionWrap>
         </PageContainer>
     }

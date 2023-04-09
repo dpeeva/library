@@ -9,6 +9,10 @@ export class BooksConnectionMock implements IBooksConnection {
         return JSON.stringify(data)
     }
 
+    public async fetchUserBooks(request: BooksRequestType): Promise<string> {
+        return JSON.stringify([])
+    }
+
     public async createBook(request: BooksRequestType): Promise<string> {
         const data = BooksConnectionMockData.data.books[0]
         return JSON.stringify(data)
