@@ -2,7 +2,7 @@ import * as React from "react"
 import { mui, muiIcon, muiLab, hero, intro_1, intro_2, intro_3, intro_4 } from "../assets"
 
 const TabPanel = mui.styled(muiLab.TabPanel)(({ }) => ({
-    height: "300px",
+    height: "320px",
 }))
 
 const TabContent = mui.styled(mui.Stack)(({ theme }) => ({
@@ -66,7 +66,7 @@ export const HeroUnit = () => {
         <muiLab.TabContext value={page}>
             <TabPanel value="1">
                 <TabContent direction={"row"} sx={{ alignItems: "end" }}>
-                    <Hero src={hero} alt="Hero Unit" width={"240px"} />
+                    <Hero src={hero} alt="Hero Unit" width={"280px"} />
                     <HeroContent>
                         <mui.Typography variant="h4">
                             Създай каталог на своята библиотека
@@ -85,7 +85,7 @@ export const HeroUnit = () => {
 
             <TabPanel value="2">
                 <TabContent direction={"row"}>
-                    <Hero src={intro_1} alt="Hero Unit 1" width={"300px"} />
+                    <Hero src={intro_1} alt="Hero Unit 1" width={"340px"} />
                     <HeroContent>
                         <mui.Typography variant="h6" component={"p"} mt={2}>
                             Имаш нужда от ред в домашната библиотека?
@@ -107,7 +107,7 @@ export const HeroUnit = () => {
 
             <TabPanel value="4">
                 <TabContent direction={"row"}>
-                    <Hero src={intro_3} alt="Hero Unit 3" width={"300px"} />
+                    <Hero src={intro_3} alt="Hero Unit 3" width={"340px"} />
                     <HeroContent>
                         <mui.Typography variant="h6" component={"p"} mt={2}>
                             Потърси книжките при нас и ги добави в свой каталог - бързо и лесно!
@@ -118,11 +118,16 @@ export const HeroUnit = () => {
 
             <TabPanel value="5">
                 <TabContent direction={"row"}>
-                    <Hero src={intro_4} alt="Hero Unit 4" width={"300px"} />
+                    <Hero src={intro_4} alt="Hero Unit 4" width={"340px"} />
                     <HeroContent>
-                        <mui.Typography variant="h6" component={"p"} mt={2}>
+                        <mui.Typography variant="h6" component={"p"} mb={2} mt={2}>
                             Регистрирай се, за да добавиш каталог.
                         </mui.Typography>
+                        <mui.Button
+                            color="warning"
+                            variant="contained"
+                            onClick={() => { }}
+                        >Регистрация</mui.Button>
                     </HeroContent>
                 </TabContent>
             </TabPanel>
@@ -151,6 +156,9 @@ export const HeroUnit = () => {
                     <Page disableRipple label={
                         <muiIcon.Circle color="warning" fontSize="small" />
                     } value="4" />
+                    <Page disableRipple label={
+                        <muiIcon.Circle color="warning" fontSize="small" />
+                    } value="5" />
                 </muiLab.TabList>
             </mui.Box>
         </muiLab.TabContext>
