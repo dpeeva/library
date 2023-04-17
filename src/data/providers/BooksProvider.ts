@@ -60,4 +60,23 @@ export class BooksProvider extends DataProvider<BookData & any, BooksRequestType
             throw err
         }
     }
+
+    public async editBook(): Promise<void> {
+        if (!this.options) {
+            return
+        }
+
+        try {
+            const raw = await this.connection.editBook(this.options)
+            const parser = new BooksParser(raw)
+
+            runInAction(() => {
+                this.data.books.replace([...this.data.books, ...parser.data.books])
+                this.data.totalRows = parser.data.totalRows
+            })
+        } catch (err) {
+            NotificationService.getInstance().notify("Book could not be edited.", "error")
+            throw err
+        }
+    }
 }

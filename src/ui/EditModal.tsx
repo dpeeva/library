@@ -26,8 +26,18 @@ const Content = mui.styled(mui.Box)(({ theme }) => ({
     padding: "20px",
 }))
 
+interface Props {
+    bookId: string
+}
+
 @observer
-export class CreateModal extends React.Component {
+export class EditModal extends React.Component<Props> {
+    bookId: string
+
+    constructor(props: Props) {
+        super(props)
+        this.bookId = this.props.bookId
+    }
 
     private get store(): Store {
         return this.context as Store
@@ -35,21 +45,21 @@ export class CreateModal extends React.Component {
 
     @action handleClose = () => {
         const { bookStore } = this.store
-        bookStore.isCreateModalOpen = false
+        bookStore.isEditModalOpen = false
     }
 
     render() {
         const { bookStore } = this.store
 
         return <mui.Modal
-            open={bookStore.isCreateModalOpen}
+            open={bookStore.isEditModalOpen}
             disableEscapeKeyDown={true}
             onClose={this.handleClose}
-            data-testid={"create-modal"}
+            data-testid={"edit-modal"}
         >
             <Wrapper>
                 <Header>
-                    Създаване на книга
+                    Редактиране на книга
                     <CloseButton
                         onClick={this.handleClose}
                     >
@@ -57,10 +67,10 @@ export class CreateModal extends React.Component {
                     </CloseButton>
                 </Header>
                 <Content>
-                    <BookForm cb={bookStore.addBook} />
+                    <BookForm cb={bookStore.editBook} />
                 </Content>
             </Wrapper>
         </mui.Modal>
     }
 }
-CreateModal.contextType = StoreContext
+EditModal.contextType = StoreContext

@@ -1,12 +1,10 @@
 import { BookStore } from "./BookStore"
-import { BookDetailsStore } from "./BookDetailsStore"
 import { IBookDetailsConnection, IBooksConnection, IUserConnection } from "./connections"
 import { authProviderFactory, bookDetailsProviderFactory, booksProviderFactory, userBooksProviderFactory } from "./providers"
 import { UserState } from "./UserState"
 
 export class Store {
     public readonly bookStore: BookStore
-    public readonly bookDetailsStore: BookDetailsStore
     public readonly userState: UserState
 
     constructor(
@@ -16,11 +14,8 @@ export class Store {
     ) {
         this.bookStore = new BookStore(
             booksProviderFactory(booksConnection),
+            bookDetailsProviderFactory(bookDetailsConnection),
             userBooksProviderFactory(booksConnection)
-        )
-
-        this.bookDetailsStore = new BookDetailsStore(
-            bookDetailsProviderFactory(bookDetailsConnection)
         )
 
         this.userState = new UserState(

@@ -1,22 +1,24 @@
 import { action, computed, observable } from "mobx"
 import { Book, BooksRequestType } from "./domain"
-import { BooksProvider, UserBooksProvider } from "./providers"
+import { BookDetailsProvider, BooksProvider, UserBooksProvider } from "./providers"
 
 export class BookStore {
     @observable public options: BooksRequestType
     @observable public booksProvider: BooksProvider
+    @observable public bookDetailsProvider: BookDetailsProvider
     @observable public userBooksProvider: UserBooksProvider
     @observable public isCreateModalOpen = false;
-    @observable public isSubmiting = false
+    @observable public isEditModalOpen = false;
 
     constructor(
         private readonly booksProviderFactory: (options: BooksRequestType) => BooksProvider,
+        private readonly bookDetailsProviderFactory: (options: BooksRequestType) => BookDetailsProvider,
         private readonly userBooksProviderFactory: (options: BooksRequestType) => UserBooksProvider
     ) {
         this.options = observable({
             jwt: "",
-            _ownerId: "",
             _id: "",
+            _ownerId: "",
             title: "",
             author: "",
             volume: "",
@@ -27,6 +29,7 @@ export class BookStore {
             coverImage: "",
         })
         this.booksProvider = this.booksProviderFactory(this.options)
+        this.bookDetailsProvider = this.bookDetailsProviderFactory(this.options)
         this.userBooksProvider = this.userBooksProviderFactory(this.options)
     }
 
@@ -76,15 +79,52 @@ export class BookStore {
     }
 
     openCreateModal = () => {
-        this.isCreateModalOpen = true
         this.resetOptions()
+        this.isCreateModalOpen = true
+    }
+
+    openEditModal = (id: string) => {
+        this.changeOptions({
+            _id: this.bookDetails._id,
+            _ownerId: this.bookDetails._ownerId,
+            title: this.bookDetails.title,
+            author: this.bookDetails.author,
+            volume: this.bookDetails.volume,
+            publisher: this.bookDetails.publisher,
+            yearOfRelease: this.bookDetails.yearOfRelease,
+            pagesCount: this.bookDetails.pagesCount,
+            cover: this.bookDetails.cover,
+            coverImage: this.bookDetails.coverImage
+        })
+        this.isEditModalOpen = true
+    }
+
+    @computed get bookDetails(): Book {
+        return this.bookDetailsProvider.data
+            ? this.bookDetailsProvider.data
+            : {}
+    }
+
+    @action getBook = async () => {
+        this.bookDetailsProvider = this.bookDetailsProvider.setOptions(this.options)
+        await this.bookDetailsProvider.fetch()
+    }
+
+    @action deleteBook = async () => {
+        await this.bookDetailsProvider.delete()
     }
 
     @action addBook = async () => {
-        this.isSubmiting = true
         this.booksProvider = this.booksProvider.setOptions(this.options)
         await this.booksProvider.addBook()
-        // TODO: rerender current books list to view newly added books
+        // TODO: rerender with newly added books
         this.isCreateModalOpen = false
+    }
+
+    @action editBook = async () => {
+        this.booksProvider = this.booksProvider.setOptions(this.options)
+        await this.booksProvider.editBook()
+        // TODO: rerender with edited details
+        this.isEditModalOpen = false
     }
 }

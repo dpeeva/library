@@ -1,6 +1,7 @@
 export { BooksList } from "./BooksList"
 export { ContentWrap } from "./ContentWrap"
 export { CreateModal } from "./CreateModal"
+export { EditModal } from "./EditModal"
 export { Header } from "./Header"
 export { HeroUnit } from "./HeroUnit"
 export { IntroUnit } from "./IntroUnit"

@@ -12,6 +12,7 @@ const FormRow = mui.styled(mui.Box)({
 
 interface Props {
     navigate: NavigateFunction
+    cb: () => Promise<void>
 }
 
 @observer
@@ -21,22 +22,22 @@ class Container extends React.Component<Props> {
         return this.context as Store
     }
 
-    onSubmit = async (e: any) => {
+    onSubmit = async (e: any, callback: Function) => {
         e.preventDefault()
         const { bookStore, userState } = this.store
         // TODO: check why needed to set jwt here explicitly
         bookStore.changeOptions({
             jwt: userState.options.jwt
         })
-        await bookStore.addBook()
-        // TODO: rerender books list on book added
+        await callback()
+        // TODO: rerender on add/edit
         // this.props.navigate(0)
     }
 
     render() {
         const { bookStore } = this.store
 
-        return <form method="POST" onSubmit={this.onSubmit}>
+        return <form method="POST" onSubmit={(e) => this.onSubmit(e, this.props.cb)}>
             <FormRow>
                 <mui.TextField
                     name="title"
@@ -190,7 +191,7 @@ class Container extends React.Component<Props> {
 }
 Container.contextType = StoreContext
 
-export const BookForm = () => {
+export const BookForm = ({ cb }: any) => {
     const navigate = useNavigate()
-    return <Container navigate={navigate} />
+    return <Container navigate={navigate} cb={cb} />
 }

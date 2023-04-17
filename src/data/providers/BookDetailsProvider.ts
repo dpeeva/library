@@ -1,13 +1,13 @@
 import { observable, runInAction } from "mobx"
 import { NotificationService } from "../../utils"
 import { IBookDetailsConnection } from "../connections"
-import { Book, BookDetailsRequestType, Cover } from "../domain"
+import { Book, BooksRequestType, Cover } from "../domain"
 import { BookDetailsParser } from "../parsers"
 import { DataProvider } from "./DataProvider"
 
-export class BookDetailsProvider extends DataProvider<Book & any, BookDetailsRequestType> {
+export class BookDetailsProvider extends DataProvider<Book & any, BooksRequestType> {
 
-    constructor(private connection: IBookDetailsConnection, options?: BookDetailsRequestType) {
+    constructor(private connection: IBookDetailsConnection, options?: BooksRequestType) {
         super("BookDetailsProvider", options)
     }
 
@@ -27,8 +27,13 @@ export class BookDetailsProvider extends DataProvider<Book & any, BookDetailsReq
         })
     }
 
-    public setOptions(options: BookDetailsRequestType): this {
-        const provider = new BookDetailsProvider(this.connection, options) as this
+    public setOptions(options: BooksRequestType): this {
+        const id = options._id || ""
+
+        const provider = new BookDetailsProvider(this.connection, {
+            ...options,
+            _id: id
+        }) as this
         provider.data = observable({
             _id: this.data._id,
         })
@@ -36,7 +41,7 @@ export class BookDetailsProvider extends DataProvider<Book & any, BookDetailsReq
     }
 
     public async fetch(): Promise<void> {
-        if (!this.options) {
+        if (!this.options || !this.options._id) {
             return
         }
 
@@ -54,7 +59,7 @@ export class BookDetailsProvider extends DataProvider<Book & any, BookDetailsReq
     }
 
     public async delete(): Promise<void> {
-        if (!this.options) {
+        if (!this.options || !this.options._id) {
             return
         }
 

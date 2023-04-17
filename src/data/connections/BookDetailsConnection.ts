@@ -1,9 +1,9 @@
 import { AjaxService } from "../../services"
-import { BookDetailsRequestType } from "../domain"
+import { BooksRequestType } from "../domain"
 
 export interface IBookDetailsConnection {
     getBook(id: string): Promise<string>
-    deleteBook(request: BookDetailsRequestType): Promise<string>
+    deleteBook(request: BooksRequestType): Promise<string>
 }
 
 export class BookDetailsConnection implements IBookDetailsConnection {
@@ -31,7 +31,7 @@ export class BookDetailsConnection implements IBookDetailsConnection {
         return respText
     }
 
-    public async deleteBook(request: BookDetailsRequestType): Promise<string> {
+    public async deleteBook(request: BooksRequestType): Promise<string> {
         if (!request.jwt) {
             return ""
         }

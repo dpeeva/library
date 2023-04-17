@@ -17,4 +17,12 @@ export class BooksConnectionMock implements IBooksConnection {
         const data = BooksConnectionMockData.data.books[0]
         return JSON.stringify(data)
     }
+
+    public async editBook(request: BooksRequestType): Promise<string> {
+        const data = {
+            ...BooksConnectionMockData.data.books[0],
+            title: "Edited Title"
+        }
+        return JSON.stringify(data)
+    }
 }

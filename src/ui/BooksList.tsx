@@ -34,11 +34,11 @@ export class Container extends React.Component<Props> {
     }
 
     handleViewMore = async (id: string) => {
-        const { bookDetailsStore } = this.store
-        bookDetailsStore.changeOptions({
+        const { bookStore } = this.store
+        bookStore.changeOptions({
             _id: id
         })
-        await bookDetailsStore.getBook()
+        await bookStore.getBook()
         this.props.navigate(`/catalog/:${id}`)
     }
 

@@ -5,6 +5,7 @@ export interface IBooksConnection {
     fetchAllBooks(request: BooksRequestType): Promise<string>
     fetchUserBooks(request: BooksRequestType): Promise<string>
     createBook(request: BooksRequestType): Promise<string>
+    editBook(request: BooksRequestType): Promise<string>
 }
 
 export class BooksConnection implements IBooksConnection {
@@ -80,6 +81,36 @@ export class BooksConnection implements IBooksConnection {
 
         if (!resp.ok) {
             throw new Error(`Could not create book: ${resp.status} ${resp.text}`)
+        }
+
+        return respText
+    }
+
+    public async editBook(request: BooksRequestType): Promise<string> {
+        if (!request.jwt) {
+            return ""
+        }
+        const resp = await fetch(`${this.baseUrl}/data/books/${request._id}`, {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json",
+                "X-Authorization": request.jwt
+            },
+            body: JSON.stringify({
+                title: request.title,
+                author: request.author,
+                volume: request.volume,
+                publisher: request.publisher,
+                yearOfRelease: request.yearOfRelease,
+                pagesCount: request.pagesCount,
+                cover: request.cover,
+                coverImage: request.coverImage,
+            })
+        })
+        const respText = await resp.text()
+
+        if (!resp.ok) {
+            throw new Error(`Could not edit book data: ${resp.status} ${resp.text}`)
         }
 
         return respText
