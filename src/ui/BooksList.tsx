@@ -1,7 +1,8 @@
 import * as React from "react"
+import { observable } from "mobx"
 import { observer } from "mobx-react"
 import { NavigateFunction, useNavigate } from "react-router-dom"
-import { mui, muiIcon } from "../assets"
+import { mui } from "../assets"
 import { StoreContext } from "../context"
 import { Store } from "../data"
 import { Book } from "../data/domain"
@@ -21,6 +22,12 @@ interface Props {
 
 @observer
 export class Container extends React.Component<Props> {
+    @observable books: Book[]
+
+    constructor(props: Props) {
+        super(props)
+        this.books = props.books
+    }
 
     private get store(): Store {
         return this.context as Store
@@ -36,13 +43,9 @@ export class Container extends React.Component<Props> {
     }
 
     render() {
-        const { bookDetailsStore, userState } = this.store
-        const isAuthenticated = userState.isAuthenticated
-
         return <mui.Grid container spacing={8} data-testid="library-app-booklist" >
-            {this.props.books.map(
+            {this.books.map(
                 (book: Book, index: number) => {
-                    const isOwner = userState.isOwner(book._ownerId)
 
                     return <mui.Grid key={`book-${index}`} item xs={6} md={4} lg={3}>
                         <mui.Card>
@@ -53,32 +56,7 @@ export class Container extends React.Component<Props> {
                                 image={book.coverImage || "https://placehold.co/415x600"}
                             />
                             <UserActions>
-                                <mui.Tooltip
-                                    title="Добави в каталог"
-                                    placement="top"
-                                >
-                                    <mui.IconButton color="inherit" onClick={() => { }}>
-                                        <muiIcon.Dns />
-                                    </mui.IconButton>
-                                </mui.Tooltip>
-
-                                {isAuthenticated && isOwner && <mui.Tooltip
-                                    title="Премахни от каталога"
-                                    placement="top"
-                                >
-                                    <mui.IconButton color="inherit" onClick={() => { }}>
-                                        <muiIcon.Delete />
-                                    </mui.IconButton>
-                                </mui.Tooltip>}
-
-                                {/* <mui.Tooltip
-                                    title="Добави в любими"
-                                    placement="top"
-                                >
-                                    <mui.IconButton color="inherit" onClick={() => { }}>
-                                        <muiIcon.FavoriteBorder />
-                                    </mui.IconButton>
-                                </mui.Tooltip> */}
+                                {/* TODO: Add option to delete books from catalog */}
                             </UserActions>
 
                             <mui.CardContent>
@@ -91,9 +69,6 @@ export class Container extends React.Component<Props> {
                                 <mui.Typography variant="body1" mt={1}>
                                     {book.author}
                                 </mui.Typography>
-                                {/* <mui.Typography variant="body1" mt={1}>
-                                    {book._ownerId}
-                                </mui.Typography> */}
                             </mui.CardContent>
 
                             <mui.CardActions sx={{

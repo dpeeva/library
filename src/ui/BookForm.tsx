@@ -29,6 +29,8 @@ class Container extends React.Component<Props> {
             jwt: userState.options.jwt
         })
         await bookStore.addBook()
+        // TODO: rerender books list on book added
+        // this.props.navigate(0)
     }
 
     render() {
