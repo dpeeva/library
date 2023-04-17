@@ -1,5 +1,5 @@
 import * as React from "react"
-import { NavigateFunction, useNavigate } from "react-router-dom"
+import { Navigate, NavigateFunction, useNavigate } from "react-router-dom"
 import { StoreContext } from "../../context"
 import { mui } from "../../assets"
 import { PageContainer, SectionHeading, SectionWrap } from ".."
@@ -26,35 +26,36 @@ export class Container extends React.Component<Props> {
 
     render() {
         const { userState } = this.store
-        const isAuthenticated = userState.isAuthenticated
 
-        return (isAuthenticated
-            ? <PageContainer data-testid="library-app-profile">
-                <SectionWrap>
-                    <SectionHeading variant="h4">
-                        Профил
-                    </SectionHeading>
+        if (!userState.isAuthenticated) {
+            return <Navigate to="/" />
+        }
 
-                    {userState.userData.username && <Row>
-                        <mui.Typography variant="h6" component={"span"}>
-                            Потребителско име:
-                        </mui.Typography>
-                        <Userdata variant="h6" component={"span"}>
-                            {this.store.userState.userData.username}
-                        </Userdata>
-                    </Row>}
+        return <PageContainer data-testid="library-app-profile">
+            <SectionWrap>
+                <SectionHeading variant="h4">
+                    Профил
+                </SectionHeading>
 
-                    <Row>
-                        <mui.Typography variant="h6" component={"span"}>
-                            Имейл:
-                        </mui.Typography>
-                        <Userdata variant="h6" component={"span"}>
-                            {userState.userData.email}
-                        </Userdata>
-                    </Row>
-                </SectionWrap>
-            </PageContainer>
-            : <>{this.props.navigate("/")}</>)
+                {userState.userData.username && <Row>
+                    <mui.Typography variant="h6" component={"span"}>
+                        Потребителско име:
+                    </mui.Typography>
+                    <Userdata variant="h6" component={"span"}>
+                        {this.store.userState.userData.username}
+                    </Userdata>
+                </Row>}
+
+                <Row>
+                    <mui.Typography variant="h6" component={"span"}>
+                        Имейл:
+                    </mui.Typography>
+                    <Userdata variant="h6" component={"span"}>
+                        {userState.userData.email}
+                    </Userdata>
+                </Row>
+            </SectionWrap>
+        </PageContainer>
     }
 }
 Container.contextType = StoreContext
