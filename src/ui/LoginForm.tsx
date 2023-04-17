@@ -31,7 +31,7 @@ class Container extends React.Component<Props> {
         bookDetailsStore.changeOptions({
             jwt: userState.options.jwt
         })
-        this.props.navigate("/")
+        this.props.navigate("/catalog")
     }
 
     render() {
