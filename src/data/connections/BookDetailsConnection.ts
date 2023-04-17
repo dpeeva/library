@@ -2,8 +2,8 @@ import { AjaxService } from "../../services"
 import { BookDetailsRequestType } from "../domain"
 
 export interface IBookDetailsConnection {
-    getById(id: string): Promise<string>
-    deleteById(request: BookDetailsRequestType): Promise<string>
+    getBook(id: string): Promise<string>
+    deleteBook(request: BookDetailsRequestType): Promise<string>
 }
 
 export class BookDetailsConnection implements IBookDetailsConnection {
@@ -15,7 +15,7 @@ export class BookDetailsConnection implements IBookDetailsConnection {
         this.baseUrl = baseUrl
     }
 
-    public async getById(id: string): Promise<string> {
+    public async getBook(id: string): Promise<string> {
         const resp = await this.ajax.send(`${this.baseUrl}/data/books/${id}`, {
             method: "GET",
             headers: {
@@ -31,7 +31,7 @@ export class BookDetailsConnection implements IBookDetailsConnection {
         return respText
     }
 
-    public async deleteById(request: BookDetailsRequestType): Promise<string> {
+    public async deleteBook(request: BookDetailsRequestType): Promise<string> {
         if (!request.jwt) {
             return ""
         }
@@ -45,7 +45,7 @@ export class BookDetailsConnection implements IBookDetailsConnection {
         const respText = await resp.text()
 
         if (!resp.ok) {
-            throw new Error(`Could not fetch book data: ${resp.status} ${resp.text}`)
+            throw new Error(`Could not delete book data: ${resp.status} ${resp.text}`)
         }
 
         return respText

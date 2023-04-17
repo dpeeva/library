@@ -10,7 +10,8 @@ const UserActions = mui.styled(mui.Box)(({ theme }) => ({
     padding: "4px",
     backgroundColor: theme.palette.common.black,
     color: theme.palette.secondary.contrastText,
-    textAlign: "right"
+    textAlign: "right",
+    minHeight: "48px",
 }))
 
 interface Props {
@@ -30,7 +31,7 @@ export class Container extends React.Component<Props> {
         bookDetailsStore.changeOptions({
             _id: id
         })
-        await bookDetailsStore.getById()
+        await bookDetailsStore.getBook()
         this.props.navigate(`/catalog/:${id}`)
     }
 

@@ -30,7 +30,7 @@ export class Container extends React.Component<Props> {
 
     handleDelete = async () => {
         const { bookDetailsStore } = this.store
-        await bookDetailsStore.deleteById()
+        await bookDetailsStore.deleteBook()
         this.props.navigate("/catalog")
     }
 

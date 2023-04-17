@@ -39,12 +39,12 @@ export class BookDetailsStore {
         })
     }
 
-    @action getById = async () => {
+    @action getBook = async () => {
         this.bookDetailsProvider = this.bookDetailsProvider.setOptions(this.options)
         await this.bookDetailsProvider.fetch()
     }
 
-    @action deleteById = async () => {
+    @action deleteBook = async () => {
         await this.bookDetailsProvider.delete()
     }
 }

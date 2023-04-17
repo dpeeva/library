@@ -41,7 +41,7 @@ export class BookDetailsProvider extends DataProvider<Book & any, BookDetailsReq
         }
 
         try {
-            const raw = await this.connection.getById(this.options._id)
+            const raw = await this.connection.getBook(this.options._id)
             const parser = new BookDetailsParser(raw)
 
             runInAction(() => {
@@ -59,7 +59,7 @@ export class BookDetailsProvider extends DataProvider<Book & any, BookDetailsReq
         }
 
         try {
-            await this.connection.deleteById(this.options)
+            await this.connection.deleteBook(this.options)
 
             runInAction(() => {
                 this.data = this.setInitialData()
