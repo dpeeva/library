@@ -1,7 +1,7 @@
 import * as React from "react"
 import { NavigateFunction, useNavigate } from "react-router-dom"
 import { observer } from "mobx-react"
-import { mui } from "../assets"
+import { mui, muiIcon } from "../assets"
 import { StoreContext } from "../context"
 import { Store } from "../data"
 
@@ -42,9 +42,45 @@ class Container extends React.Component<Props> {
                         })
                     }}
                     label="Потребителско име"
+                    placeholder="Въведи псевдоним"
+                    color="secondary"
+                    helperText={""}
+                    InputProps={{
+                        endAdornment: userState.options.username && (
+                            <mui.IconButton
+                                onClick={() => userState.changeOptions({
+                                    username: ""
+                                })}
+                                tabIndex={-1}
+                            ><muiIcon.Close /></mui.IconButton>
+                        )
+                    }}
+                    fullWidth
+                />
+            </FormRow>
+            <FormRow>
+                <mui.TextField
+                    name="email"
+                    value={userState.options.email}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        userState.changeOptions({
+                            email: e.target.value
+                        })
+                    }}
+                    label="Имейл"
                     placeholder="Въведи имейл"
                     color="secondary"
                     helperText={""}
+                    InputProps={{
+                        endAdornment: userState.options.username && (
+                            <mui.IconButton
+                                onClick={() => userState.changeOptions({
+                                    email: ""
+                                })}
+                                tabIndex={-1}
+                            ><muiIcon.Close /></mui.IconButton>
+                        )
+                    }}
                     fullWidth
                 />
             </FormRow>
@@ -62,6 +98,16 @@ class Container extends React.Component<Props> {
                     placeholder="Парола"
                     color="secondary"
                     helperText={""}
+                    InputProps={{
+                        endAdornment: userState.options.username && (
+                            <mui.IconButton
+                                onClick={() => userState.changeOptions({
+                                    password: ""
+                                })}
+                                tabIndex={-1}
+                            ><muiIcon.Close /></mui.IconButton>
+                        )
+                    }}
                     fullWidth
                 />
             </FormRow>

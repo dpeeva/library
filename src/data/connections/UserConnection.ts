@@ -23,7 +23,8 @@ export class UserConnection implements IUserConnection {
                 "content-type": "application/json",
             },
             body: JSON.stringify({
-                email: request.username,
+                email: request.email,
+                username: request.username,
                 password: request.password
             })
         })
@@ -59,7 +60,8 @@ export class UserConnection implements IUserConnection {
                 "content-type": "application/json",
             },
             body: JSON.stringify({
-                email: request.username,
+                email: request.email,
+                username: request.username,
                 password: request.password
             })
         })

@@ -40,14 +40,14 @@ class Container extends React.Component<Props> {
         return <form method="POST" onSubmit={this.onSubmit}>
             <FormRow>
                 <mui.TextField
-                    name="username"
-                    value={userState.options.username}
+                    name="email"
+                    value={userState.options.email}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                         userState.changeOptions({
-                            username: e.target.value
+                            email: e.target.value
                         })
                     }}
-                    label="Потребителско име"
+                    label="Имейл"
                     placeholder="Въведи имейл"
                     color="secondary"
                     helperText={""}

@@ -10,7 +10,7 @@ export class UserParser {
             _id: parsedResponse._id,
             jwt: parsedResponse.accessToken,
             email: parsedResponse.email,
-            username: parsedResponse.email,
+            username: parsedResponse.username,
         }
     }
 }
