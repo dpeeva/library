@@ -13,6 +13,7 @@ export class BooksProvider extends DataProvider<BookData & any, BooksRequestType
 
     protected setInitialData() {
         return observable<BookData>({
+            currentBookId: "",
             books: observable([]),
             totalRows: 0
         })
@@ -21,6 +22,7 @@ export class BooksProvider extends DataProvider<BookData & any, BooksRequestType
     public setOptions(options: BooksRequestType): this {
         const provider = new BooksProvider(this.connection, options) as this
         provider.data = observable({
+            currentBookId: this.data.currentBookId,
             books: this.data.books,
             totalRows: this.data.totalRows
         })
@@ -33,6 +35,7 @@ export class BooksProvider extends DataProvider<BookData & any, BooksRequestType
             const parser = new BooksParser(raw)
 
             runInAction(() => {
+                this.data.currentBookId = ""
                 this.data.books.replace(parser.data.books)
                 this.data.totalRows = parser.data.totalRows
             })
@@ -52,6 +55,7 @@ export class BooksProvider extends DataProvider<BookData & any, BooksRequestType
             const parser = new BooksParser(raw)
 
             runInAction(() => {
+                this.data.currentBookId = parser.data.currentBookId
                 this.data.books.replace([parser.data.books])
             })
         } catch (err) {
@@ -70,6 +74,7 @@ export class BooksProvider extends DataProvider<BookData & any, BooksRequestType
             const parser = new BooksParser(raw)
 
             runInAction(() => {
+                this.data.currentBookId = parser.data.currentBookId
                 this.data.books.replace([...this.data.books, ...parser.data.books])
                 this.data.totalRows = parser.data.totalRows
             })
@@ -89,6 +94,7 @@ export class BooksProvider extends DataProvider<BookData & any, BooksRequestType
             const parser = new BooksParser(raw)
 
             runInAction(() => {
+                this.data.currentBookId = this.data.currentBookId
                 this.data.books.replace([...this.data.books, ...parser.data.books])
                 this.data.totalRows = parser.data.totalRows
             })

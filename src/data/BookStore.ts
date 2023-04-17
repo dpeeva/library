@@ -7,8 +7,9 @@ export class BookStore {
     @observable public booksProvider: BooksProvider
     @observable public bookDetailsProvider: BookDetailsProvider
     @observable public userBooksProvider: UserBooksProvider
-    @observable public isCreateModalOpen = false;
-    @observable public isEditModalOpen = false;
+    @observable public isCreateModalOpen = false
+    @observable public isEditModalOpen = false
+    @observable public currentBookId: string
 
     constructor(
         private readonly booksProviderFactory: (options: BooksRequestType) => BooksProvider,
@@ -32,20 +33,8 @@ export class BookStore {
         this.booksProvider = this.booksProviderFactory(this.options)
         this.bookDetailsProvider = this.bookDetailsProviderFactory(this.options)
         this.userBooksProvider = this.userBooksProviderFactory(this.options)
+        this.currentBookId = this.booksProvider.data.currentBookId
     }
-
-    // @computed get bookOptions() {
-    //     return {
-    //         _id: this.options._id,
-    //         title: this.options.title,
-    //         author: this.options.author,
-    //         volume: this.options.volume,
-    //         publisher: this.options.publisher,
-    //         yearOfRelease: this.options.yearOfRelease,
-    //         pagesCount: this.options.pagesCount,
-    //         cover: this.options.cover,
-    //     }
-    // }
 
     @action public changeOptions(options: Partial<BooksRequestType>) {
         Object.assign(this.options, options)
@@ -65,8 +54,8 @@ export class BookStore {
 
     @action public resetOptions = () => {
         this.options = observable({
-            jwt: "",
-            _id: "",
+            jwt: this.options.jwt,
+            _id: this.booksProvider.data.currentBookId,
             _ownerId: "",
             _createdOn: "",
             title: "",
@@ -78,6 +67,10 @@ export class BookStore {
             cover: "",
             coverImage: "",
         })
+    }
+
+    public resetCurrentBookId = (id: string) => {
+        this.currentBookId = id
     }
 
     @action openCreateModal = () => {
@@ -111,16 +104,20 @@ export class BookStore {
     @action getBook = async () => {
         this.booksProvider = this.booksProvider.setOptions(this.options)
         await this.booksProvider.fetchById()
+        this.resetCurrentBookId(this.booksProvider.data.currentBookId)
     }
 
     @action deleteBook = async () => {
         await this.booksProvider.delete()
+        this.resetOptions()
+        this.resetCurrentBookId("")
     }
 
     @action addBook = async () => {
         this.booksProvider = this.booksProvider.setOptions(this.options)
         await this.booksProvider.addBook()
         // TODO: rerender with newly added books
+        this.resetCurrentBookId(this.booksProvider.data.currentBookId)
         this.isCreateModalOpen = false
     }
 
@@ -128,6 +125,7 @@ export class BookStore {
         this.booksProvider = this.booksProvider.setOptions(this.options)
         await this.booksProvider.editBook()
         // TODO: rerender with edited details
+        this.resetCurrentBookId(this.booksProvider.data.currentBookId)
         this.isEditModalOpen = false
     }
 }
