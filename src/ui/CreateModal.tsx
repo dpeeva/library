@@ -1,4 +1,5 @@
 import * as React from "react"
+import { NavigateFunction, useNavigate } from "react-router-dom"
 import { action } from "mobx"
 import { observer } from "mobx-react"
 import { mui, muiIcon } from "../assets"
@@ -26,11 +27,21 @@ const Content = mui.styled(mui.Box)(({ theme }) => ({
     padding: "20px",
 }))
 
+interface Props {
+    navigate: NavigateFunction
+}
+
 @observer
-export class CreateModal extends React.Component {
+export class Container extends React.Component<Props> {
 
     private get store(): Store {
         return this.context as Store
+    }
+
+    @action handleCreate = async () => {
+        const { bookStore } = this.store
+        await bookStore.addBook()
+        this.props.navigate(`/catalog/:${bookStore.booksProvider.data.books[0]._id}`)
     }
 
     @action handleClose = () => {
@@ -57,10 +68,15 @@ export class CreateModal extends React.Component {
                     </CloseButton>
                 </Header>
                 <Content>
-                    <BookForm cb={bookStore.addBook} />
+                    <BookForm cb={this.handleCreate} />
                 </Content>
             </Wrapper>
         </mui.Modal>
     }
 }
-CreateModal.contextType = StoreContext
+Container.contextType = StoreContext
+
+export const CreateModal = () => {
+    const navigate = useNavigate()
+    return <Container navigate={navigate} />
+}

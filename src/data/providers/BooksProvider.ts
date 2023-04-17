@@ -42,6 +42,24 @@ export class BooksProvider extends DataProvider<BookData & any, BooksRequestType
         }
     }
 
+    public async fetchById(): Promise<void> {
+        if (!this.options || !this.options._id) {
+            return
+        }
+
+        try {
+            const raw = await this.connection.fetchBookById(this.options._id)
+            const parser = new BooksParser(raw)
+
+            runInAction(() => {
+                this.data.books.replace([parser.data.books])
+            })
+        } catch (err) {
+            NotificationService.getInstance().notify("Book could not be loaded.", "error")
+            throw err
+        }
+    }
+
     public async addBook(): Promise<void> {
         if (!this.options) {
             return
@@ -76,6 +94,23 @@ export class BooksProvider extends DataProvider<BookData & any, BooksRequestType
             })
         } catch (err) {
             NotificationService.getInstance().notify("Book could not be edited.", "error")
+            throw err
+        }
+    }
+
+    public async delete(): Promise<void> {
+        if (!this.options || !this.options._id) {
+            return
+        }
+
+        try {
+            await this.connection.deleteBook(this.options)
+
+            runInAction(() => {
+                this.data = this.setInitialData()
+            })
+        } catch (err) {
+            NotificationService.getInstance().notify("Book could not be deleted.", "error")
             throw err
         }
     }

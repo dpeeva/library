@@ -4,8 +4,10 @@ import { AjaxService } from "../../services"
 export interface IBooksConnection {
     fetchAllBooks(request: BooksRequestType): Promise<string>
     fetchUserBooks(request: BooksRequestType): Promise<string>
+    fetchBookById(id: string): Promise<string>
     createBook(request: BooksRequestType): Promise<string>
     editBook(request: BooksRequestType): Promise<string>
+    deleteBook(request: BooksRequestType): Promise<string>
 }
 
 export class BooksConnection implements IBooksConnection {
@@ -50,6 +52,22 @@ export class BooksConnection implements IBooksConnection {
 
         if (!resp.ok) {
             throw new Error(`Could not fetch books for this user: ${resp.status} ${resp.text}`)
+        }
+
+        return respText
+    }
+
+    public async fetchBookById(id: string): Promise<string> {
+        const resp = await this.ajax.send(`${this.baseUrl}/data/books/${id}`, {
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+            },
+        })
+        const respText = await resp.text()
+
+        if (!resp.ok) {
+            throw new Error(`Could not fetch book data: ${resp.status} ${resp.text}`)
         }
 
         return respText
@@ -111,6 +129,26 @@ export class BooksConnection implements IBooksConnection {
 
         if (!resp.ok) {
             throw new Error(`Could not edit book data: ${resp.status} ${resp.text}`)
+        }
+
+        return respText
+    }
+
+    public async deleteBook(request: BooksRequestType): Promise<string> {
+        if (!request.jwt) {
+            return ""
+        }
+        const resp = await fetch(`${this.baseUrl}/data/books/${request._id}`, {
+            method: "DELETE",
+            headers: {
+                "content-type": "application/json",
+                "X-Authorization": request.jwt
+            },
+        })
+        const respText = await resp.text()
+
+        if (!resp.ok) {
+            throw new Error(`Could not delete book data: ${resp.status} ${resp.text}`)
         }
 
         return respText

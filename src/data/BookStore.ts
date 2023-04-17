@@ -19,6 +19,7 @@ export class BookStore {
             jwt: "",
             _id: "",
             _ownerId: "",
+            _createdOn: "",
             title: "",
             author: "",
             volume: "",
@@ -67,6 +68,7 @@ export class BookStore {
             jwt: "",
             _id: "",
             _ownerId: "",
+            _createdOn: "",
             title: "",
             author: "",
             volume: "",
@@ -78,15 +80,16 @@ export class BookStore {
         })
     }
 
-    openCreateModal = () => {
+    @action openCreateModal = () => {
         this.resetOptions()
         this.isCreateModalOpen = true
     }
 
-    openEditModal = (id: string) => {
+    @action openEditModal = (id: string) => {
         this.changeOptions({
             _id: this.bookDetails._id,
             _ownerId: this.bookDetails._ownerId,
+            _createdOn: this.bookDetails._createdOn,
             title: this.bookDetails.title,
             author: this.bookDetails.author,
             volume: this.bookDetails.volume,
@@ -106,12 +109,12 @@ export class BookStore {
     }
 
     @action getBook = async () => {
-        this.bookDetailsProvider = this.bookDetailsProvider.setOptions(this.options)
-        await this.bookDetailsProvider.fetch()
+        this.booksProvider = this.booksProvider.setOptions(this.options)
+        await this.booksProvider.fetchById()
     }
 
     @action deleteBook = async () => {
-        await this.bookDetailsProvider.delete()
+        await this.booksProvider.delete()
     }
 
     @action addBook = async () => {

@@ -13,6 +13,10 @@ export class BooksConnectionMock implements IBooksConnection {
         return JSON.stringify([])
     }
 
+    public async fetchBookById(id: string): Promise<string> {
+        return JSON.stringify([])
+    }
+
     public async createBook(request: BooksRequestType): Promise<string> {
         const data = BooksConnectionMockData.data.books[0]
         return JSON.stringify(data)
@@ -23,6 +27,11 @@ export class BooksConnectionMock implements IBooksConnection {
             ...BooksConnectionMockData.data.books[0],
             title: "Edited Title"
         }
+        return JSON.stringify(data)
+    }
+
+    public async deleteBook(request: BooksRequestType): Promise<string> {
+        const data = ""
         return JSON.stringify(data)
     }
 }
