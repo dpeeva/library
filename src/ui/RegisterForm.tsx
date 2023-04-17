@@ -25,7 +25,7 @@ class Container extends React.Component<Props> {
         e.preventDefault()
         const { userState } = this.store
         await userState.onRegister()
-        this.props.navigate("/")
+        this.props.navigate("/catalog")
     }
 
     render() {

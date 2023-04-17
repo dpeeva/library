@@ -40,90 +40,65 @@ export class Container extends React.Component<Props> {
         const isAuthenticated = userState.isAuthenticated
         const isOwner = userState.isOwner(bookDetails._ownerId)
 
+        return (
+            isAuthenticated
+                ? <PageContainer data-testid="library-app-details">
+                    <SectionWrap>
+                        <SectionHeading variant="h4">
+                            Details
+                        </SectionHeading>
 
-        return <PageContainer data-testid="library-app-details">
-            <SectionWrap>
-                <SectionHeading variant="h4">
-                    Details
-                </SectionHeading>
+                        <BookDetails>
+                            {bookDetails && <mui.Card sx={{ maxWidth: "600px" }}>
+                                <mui.CardMedia
+                                    component="img"
+                                    alt={`${bookDetails.title}`}
+                                    height="460"
+                                    image={bookDetails.coverImage || "https://placehold.co/415x600"}
+                                />
+                                <UserActions>
+                                    {isAuthenticated && isOwner && <>
+                                        <mui.Tooltip
+                                            title="Премахни от каталога"
+                                            placement="top"
+                                        >
+                                            <mui.IconButton
+                                                color="inherit"
+                                                onClick={this.handleDelete}
+                                            >
+                                                <muiIcon.Delete />
+                                            </mui.IconButton>
+                                        </mui.Tooltip>
+                                    </>}
+                                </UserActions>
 
-                <BookDetails>
-                    {bookDetails && <mui.Card sx={{ maxWidth: "600px" }}>
-                        <mui.CardMedia
-                            component="img"
-                            alt={`${bookDetails.title}`}
-                            height="460"
-                            image={bookDetails.coverImage || "https://placehold.co/415x600"}
-                        />
-                        <UserActions>
-                            <mui.Tooltip
-                                title="Добави в каталог"
-                                placement="top"
-                            >
-                                <mui.IconButton color="inherit" onClick={() => { }}>
-                                    <muiIcon.Dns />
-                                </mui.IconButton>
-                            </mui.Tooltip>
+                                <mui.CardContent>
+                                    <mui.Typography variant="h6" component={"div"} fontWeight={"bold"} sx={{
+                                        maxHeight: "96px",
+                                        overflow: "hidden",
+                                    }}>
+                                        {bookDetails.title}
+                                    </mui.Typography>
+                                    <mui.Typography variant="body1" mt={1}>
+                                        {bookDetails.author}
+                                    </mui.Typography>
+                                    {bookDetails.publisher && <mui.Typography mt={1}>
+                                        Publisher: {bookDetails.publisher}
+                                    </mui.Typography>}
+                                    {bookDetails.volume && <mui.Typography mt={1}>
+                                        Volume: {bookDetails.volume}
+                                    </mui.Typography>}
+                                    {bookDetails.yearOfRelease && <mui.Typography mt={1}>
+                                        Година на издаване: {bookDetails.yearOfRelease}
+                                    </mui.Typography>}
+                                </mui.CardContent>
 
-                            {isAuthenticated && isOwner && <mui.Tooltip
-                                title="Премахни от каталога"
-                                placement="top"
-                            >
-                                <mui.IconButton
-                                    color="inherit"
-                                    onClick={this.handleDelete}
-                                >
-                                    <muiIcon.Delete />
-                                </mui.IconButton>
-                            </mui.Tooltip>}
-
-                            {/* <mui.Tooltip
-                            title="Добави в любими"
-                            placement="top"
-                        >
-                            <mui.IconButton color="inherit" onClick={() => { }}>
-                                <muiIcon.FavoriteBorder />
-                            </mui.IconButton>
-                        </mui.Tooltip> */}
-                        </UserActions>
-
-                        <mui.CardContent>
-                            <mui.Typography variant="h6" component={"div"} fontWeight={"bold"} sx={{
-                                maxHeight: "96px",
-                                overflow: "hidden",
-                            }}>
-                                {bookDetails.title}
-                            </mui.Typography>
-                            <mui.Typography variant="body1" mt={1}>
-                                {bookDetails.author}
-                            </mui.Typography>
-                            {bookDetails.publisher && <mui.Typography mt={1}>
-                                Publisher: {bookDetails.publisher}
-                            </mui.Typography>}
-                            {bookDetails.volume && <mui.Typography mt={1}>
-                                Volume: {bookDetails.volume}
-                            </mui.Typography>}
-                            {bookDetails.yearOfRelease && <mui.Typography mt={1}>
-                                Година на издаване: {bookDetails.yearOfRelease}
-                            </mui.Typography>}
-                        </mui.CardContent>
-
-                        {userState.isAuthenticated && userState.isOwner(bookDetails._ownerId) &&
-                            <mui.CardActions sx={{
-                                paddingBottom: "16px"
-                            }}>
-                                <mui.Button
-                                    color="warning"
-                                    variant="contained"
-                                    onClick={() => { }}
-                                >Редактирай</mui.Button>
-                            </mui.CardActions>
-                        }
-
-                    </mui.Card>}
-                </BookDetails>
-            </SectionWrap>
-        </PageContainer>
+                            </mui.Card>}
+                        </BookDetails>
+                    </SectionWrap>
+                </PageContainer>
+                : <>{this.props.navigate("/")}</>
+        )
     }
 }
 Container.contextType = StoreContext

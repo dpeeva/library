@@ -5,8 +5,8 @@ import { Cover } from "./Book"
 
 export type BooksRequestType = {
     jwt?: string
-    _ownerId?: string
     _id?: string
+    _ownerId?: string
     title?: string
     author?: string
     volume?: string
