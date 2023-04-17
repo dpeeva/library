@@ -18,10 +18,12 @@ export class Home extends React.Component {
         return <PageContainer data-testid="library-app-home">
             <IntroUnit />
             <SectionWrap>
-                <SectionHeading variant="h4">
-                    Последно добавени
-                </SectionHeading>
-                <BooksList books={books} />
+                {books.length !== 0 && <>
+                    <SectionHeading variant="h4">
+                        Последно добавени
+                    </SectionHeading>
+                    <BooksList books={books} />
+                </>}
             </SectionWrap>
         </PageContainer>
     }

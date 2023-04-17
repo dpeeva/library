@@ -51,7 +51,7 @@ export class Container extends React.Component<Props> {
                 <SectionHeading variant="h4">
                     Книги в каталога
                 </SectionHeading>
-                {books.length
+                {books.length !== 0
                     ? <BooksList books={books} />
                     : "Все още нямате добавени книги в каталога"
                 }
