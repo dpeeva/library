@@ -12,7 +12,7 @@ const FormRow = mui.styled(mui.Box)({
 
 interface Props {
     navigate: NavigateFunction
-    cb: () => Promise<void>
+    cb: Function
 }
 
 @observer

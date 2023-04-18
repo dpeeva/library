@@ -79,7 +79,7 @@ export class BooksProvider extends DataProvider<BookData & any, BooksRequestType
                 this.data.totalRows = parser.data.totalRows
             })
         } catch (err) {
-            NotificationService.getInstance().notify("Books could not be loaded.", "error")
+            NotificationService.getInstance().notify("Book could not be added.", "error")
             throw err
         }
     }
@@ -94,7 +94,7 @@ export class BooksProvider extends DataProvider<BookData & any, BooksRequestType
             const parser = new BooksParser(raw)
 
             runInAction(() => {
-                this.data.currentBookId = this.data.currentBookId
+                this.data.currentBookId = parser.data.currentBookId
                 this.data.books.replace([...this.data.books, ...parser.data.books])
                 this.data.totalRows = parser.data.totalRows
             })
