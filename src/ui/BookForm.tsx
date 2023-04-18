@@ -30,8 +30,6 @@ class Container extends React.Component<Props> {
             jwt: userState.options.jwt
         })
         await callback()
-        // TODO: rerender on add/edit
-        // this.props.navigate(0)
     }
 
     render() {

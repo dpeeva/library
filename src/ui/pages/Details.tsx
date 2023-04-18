@@ -47,7 +47,7 @@ export class Container extends React.Component<Props> {
         const isOwner = userState.isOwner(bookDetails._ownerId || "")
 
         return (
-            bookStore.currentBookId !== ""
+            bookStore.options._id !== ""
                 ? <PageContainer data-testid="library-app-details">
                     <SectionWrap>
                         <SectionHeading variant="h4">
@@ -117,7 +117,7 @@ export class Container extends React.Component<Props> {
                         <EditModal bookId={bookDetails._id || ""} />
                     </SectionWrap>
                 </PageContainer>
-                : <Navigate to="/" />
+                : <Navigate to="/catalog" />
         )
     }
 }

@@ -14,7 +14,6 @@ export class BooksParser {
         const id = Array.isArray(parsedResponse) ? "" : (parsedResponse as unknown as Book)._id
 
         return {
-            currentBookId: id,
             books: books as IObservableArray<Book>,
             totalRows: parsedResponse.length
         }

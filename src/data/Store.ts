@@ -1,6 +1,6 @@
 import { BookStore } from "./BookStore"
-import { IBookDetailsConnection, IBooksConnection, IUserConnection } from "./connections"
-import { authProviderFactory, bookDetailsProviderFactory, booksProviderFactory, userBooksProviderFactory } from "./providers"
+import { IBooksConnection, IUserConnection } from "./connections"
+import { authProviderFactory, booksProviderFactory, userBooksProviderFactory } from "./providers"
 import { UserState } from "./UserState"
 
 export class Store {
@@ -9,12 +9,10 @@ export class Store {
 
     constructor(
         booksConnection: IBooksConnection,
-        bookDetailsConnection: IBookDetailsConnection,
         userConnection: IUserConnection
     ) {
         this.bookStore = new BookStore(
             booksProviderFactory(booksConnection),
-            bookDetailsProviderFactory(bookDetailsConnection),
             userBooksProviderFactory(booksConnection)
         )
 

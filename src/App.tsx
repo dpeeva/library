@@ -2,7 +2,7 @@ import * as React from "react"
 import { mui } from "./assets"
 import { Routes, Route } from "react-router-dom"
 import { StoreContext } from "./context"
-import { BookDetailsConnection, BooksConnection, IBookDetailsConnection, IBooksConnection, Store } from "./data"
+import { BooksConnection, IBooksConnection, Store } from "./data"
 import { Catalog, ContentWrap, Details, Header, Home, Login, Logout, NotFound, Profile, Register } from "./ui"
 import { AjaxService } from "./services"
 import { IUserConnection, UserConnection } from "./data/connections/UserConnection"
@@ -15,7 +15,6 @@ const Wrapper = mui.styled(mui.Box)({
 export class App extends React.Component {
     private store?: Store
     private readonly booksConnection: IBooksConnection
-    private readonly bookDetailsConnection: IBookDetailsConnection
     private readonly userConnection: IUserConnection
 
     constructor(props: any) {
@@ -23,7 +22,6 @@ export class App extends React.Component {
         const ajax = new AjaxService()
         const baseUrl = "http://localhost:3030"
         this.booksConnection = new BooksConnection(`${baseUrl}`, ajax)
-        this.bookDetailsConnection = new BookDetailsConnection(`${baseUrl}`, ajax)
         this.userConnection = new UserConnection(`${baseUrl}`, ajax)
         this.store = undefined
         this.init()
@@ -32,7 +30,6 @@ export class App extends React.Component {
     async init(): Promise<void> {
         this.store = new Store(
             this.booksConnection,
-            this.bookDetailsConnection,
             this.userConnection
         )
     }

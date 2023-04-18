@@ -41,7 +41,7 @@ export class Container extends React.Component<Props> {
     @action handleCreate = async () => {
         const { bookStore } = this.store
         await bookStore.addBook()
-        this.props.navigate(`/catalog/:${bookStore.currentBookId}`)
+        this.props.navigate(`/catalog/:${bookStore.options._id}`)
     }
 
     @action handleClose = () => {

@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react"
 import { StoreContext } from "../../context"
-import { BookDetailsConnectionMock, BooksConnectionMock, Store, UserConnectionMock } from "../../data"
+import { BooksConnectionMock, Store, UserConnectionMock } from "../../data"
 import { Profile } from "./Profile"
 
 describe("Profile page", () => {
@@ -8,7 +8,6 @@ describe("Profile page", () => {
     beforeEach(() => {
         store = new Store(
             new BooksConnectionMock(),
-            new BookDetailsConnectionMock(),
             new UserConnectionMock()
         )
         render(

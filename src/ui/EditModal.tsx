@@ -48,7 +48,6 @@ export class Container extends React.Component<Props> {
     @action handleEdit = async () => {
         const { bookStore } = this.store
         await bookStore.editBook()
-        this.props.navigate("/catalog")
     }
 
     @action handleClose = () => {

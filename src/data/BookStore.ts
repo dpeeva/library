@@ -1,19 +1,16 @@
 import { action, computed, observable } from "mobx"
 import { Book, BooksRequestType } from "./domain"
-import { BookDetailsProvider, BooksProvider, UserBooksProvider } from "./providers"
+import { BooksProvider, UserBooksProvider } from "./providers"
 
 export class BookStore {
     @observable public options: BooksRequestType
     @observable public booksProvider: BooksProvider
-    @observable public bookDetailsProvider: BookDetailsProvider
     @observable public userBooksProvider: UserBooksProvider
     @observable public isCreateModalOpen = false
     @observable public isEditModalOpen = false
-    @observable public currentBookId: string
 
     constructor(
         private readonly booksProviderFactory: (options: BooksRequestType) => BooksProvider,
-        private readonly bookDetailsProviderFactory: (options: BooksRequestType) => BookDetailsProvider,
         private readonly userBooksProviderFactory: (options: BooksRequestType) => UserBooksProvider
     ) {
         this.options = observable({
@@ -31,9 +28,7 @@ export class BookStore {
             coverImage: "",
         })
         this.booksProvider = this.booksProviderFactory(this.options)
-        this.bookDetailsProvider = this.bookDetailsProviderFactory(this.options)
         this.userBooksProvider = this.userBooksProviderFactory(this.options)
-        this.currentBookId = this.booksProvider.data.currentBookId
     }
 
     @action public changeOptions(options: Partial<BooksRequestType>) {
@@ -55,7 +50,7 @@ export class BookStore {
     @action public resetOptions = () => {
         this.options = observable({
             jwt: this.options.jwt,
-            _id: this.booksProvider.data.currentBookId,
+            _id: "",
             _ownerId: "",
             _createdOn: "",
             title: "",
@@ -67,10 +62,6 @@ export class BookStore {
             cover: "",
             coverImage: "",
         })
-    }
-
-    public resetCurrentBookId = (id: string) => {
-        this.currentBookId = id
     }
 
     @action openCreateModal = () => {
@@ -96,36 +87,30 @@ export class BookStore {
     }
 
     @computed get bookDetails(): Book {
-        return this.bookDetailsProvider.data
-            ? this.bookDetailsProvider.data
-            : {}
+        return this.booksProvider.data.books.find(
+            (book: Book) => book._id === this.options._id
+        ) || {}
     }
 
     @action getBook = async () => {
         this.booksProvider = this.booksProvider.setOptions(this.options)
         await this.booksProvider.fetchById()
-        this.resetCurrentBookId(this.booksProvider.data.currentBookId)
     }
 
     @action deleteBook = async () => {
         await this.booksProvider.delete()
         this.resetOptions()
-        this.resetCurrentBookId("")
     }
 
     @action addBook = async () => {
         this.booksProvider = this.booksProvider.setOptions(this.options)
         await this.booksProvider.addBook()
-        // TODO: rerender with newly added books
-        this.resetCurrentBookId(this.booksProvider.data.currentBookId)
         this.isCreateModalOpen = false
     }
 
     @action editBook = async () => {
         this.booksProvider = this.booksProvider.setOptions(this.options)
         await this.booksProvider.editBook()
-        // TODO: rerender with edited details
-        this.resetCurrentBookId(this.booksProvider.data.currentBookId)
         this.isEditModalOpen = false
     }
 }
