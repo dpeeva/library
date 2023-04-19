@@ -107,6 +107,9 @@ class Container extends React.Component<Props> {
                         })
                     }}
                     type="number"
+                    InputProps={{
+                        inputProps: { min: 1800, max: 2023 },
+                    }}
                     label="Година на издаване"
                     placeholder="Въведи година на издаване"
                     color="secondary"
