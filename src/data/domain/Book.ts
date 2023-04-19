@@ -1,6 +1,10 @@
 /* istanbul ignore file */
 
 export type Cover = "softcover" | "hardcover"
+export enum CoverTypes {
+    "softcover" = "мека",
+    "hardcover" = "твърда"
+}
 
 export interface Book {
     _id: string

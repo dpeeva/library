@@ -4,6 +4,7 @@ import { observer } from "mobx-react"
 import { mui, muiIcon } from "../../assets"
 import { StoreContext } from "../../context"
 import { Store } from "../../data"
+import { CoverTypes } from "../../data/domain"
 import { EditModal, PageContainer, SectionHeading, SectionWrap } from ".."
 
 const BookDetails = mui.styled(mui.Box)({
@@ -101,13 +102,19 @@ export class Container extends React.Component<Props> {
                                         {bookDetails.author}
                                     </mui.Typography>
                                     {bookDetails.publisher && <mui.Typography mt={1}>
-                                        Publisher: {bookDetails.publisher}
+                                        Издател: {bookDetails.publisher}
                                     </mui.Typography>}
                                     {bookDetails.volume && <mui.Typography mt={1}>
-                                        Volume: {bookDetails.volume}
+                                        Том: {bookDetails.volume}
                                     </mui.Typography>}
                                     {bookDetails.yearOfRelease && <mui.Typography mt={1}>
                                         Година на издаване: {bookDetails.yearOfRelease}
+                                    </mui.Typography>}
+                                    {bookDetails.pagesCount && <mui.Typography mt={1}>
+                                        Брой страници: {bookDetails.pagesCount}
+                                    </mui.Typography>}
+                                    {bookDetails.cover && <mui.Typography mt={1}>
+                                        Корица: {CoverTypes[bookDetails.cover]}
                                     </mui.Typography>}
                                 </mui.CardContent>
 
