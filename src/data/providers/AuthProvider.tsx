@@ -55,7 +55,7 @@ export class AuthProvider extends DataProvider<UserData & any, UserRequestType> 
         }
 
         try {
-            const raw = await this.connection.logout(this.options)
+            await this.connection.logout(this.options)
 
             runInAction(() => {
                 this.data._id = ""

@@ -11,7 +11,6 @@ export class BooksParser {
     parseResponse(response: string) {
         const parsedResponse = JSON.parse(response)
         const books = Array.isArray(parsedResponse) ? parsedResponse : [parsedResponse]
-        const id = Array.isArray(parsedResponse) ? "" : (parsedResponse as unknown as Book)._id
 
         return {
             books: books as IObservableArray<Book>,

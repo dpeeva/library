@@ -7,25 +7,25 @@ import { StoreContext } from "../context"
 import { Store } from "../data"
 import { BookForm } from "./BookForm"
 
-const Wrapper = mui.styled(mui.Paper)(({ theme }) => ({
+const Wrapper = mui.styled(mui.Paper)({
     margin: "40px auto",
     padding: "20px",
     width: "600px",
-}))
+})
 
-const Header = mui.styled(mui.DialogTitle)(({ }) => ({
+const Header = mui.styled(mui.DialogTitle)({
     position: "relative"
-}))
+})
 
-const CloseButton = mui.styled(mui.IconButton)(({ theme }) => ({
+const CloseButton = mui.styled(mui.IconButton)({
     position: "absolute",
     top: "10px",
     right: "10px",
-}))
+})
 
-const Content = mui.styled(mui.Box)(({ theme }) => ({
+const Content = mui.styled(mui.Box)({
     padding: "20px",
-}))
+})
 
 interface Props {
     navigate: NavigateFunction
