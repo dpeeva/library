@@ -24,11 +24,6 @@ class Container extends React.Component<Props> {
 
     onSubmit = async (e: any, callback: Function) => {
         e.preventDefault()
-        const { bookStore, userState } = this.store
-        // TODO: check why needed to set jwt here explicitly
-        bookStore.changeOptions({
-            jwt: userState.options.jwt
-        })
         await callback()
     }
 

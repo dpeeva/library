@@ -26,9 +26,7 @@ class Container extends React.Component<Props> {
         const { bookStore, userState } = this.store
         await userState.onLogin()
         bookStore.changeOptions({
-            _ownerId: userState.options._id
-        })
-        bookStore.changeOptions({
+            _ownerId: userState.options._id,
             jwt: userState.options.jwt
         })
         this.props.navigate("/catalog")

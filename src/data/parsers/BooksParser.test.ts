@@ -12,15 +12,16 @@ describe("BooksParser", () => {
 
         expect(parser.data.books).toEqual([
             {
+                _createdOn: "",
+                _id: "1",
+                _ownerId: "",
                 author: ["Лев Толстой"],
                 coverImage: "https://kryg.eu/wp-content/uploads/2021/11/%D0%9A%D0%BE%D1%80%D0%B8%D1%86%D0%B0-%D0%A2%D0%BE%D0%BC-1-RGB-0-scaled.jpg",
                 volume: 1,
                 cover: "hardcover",
                 id: 1,
                 pagesCount: 516,
-                publisher: [
-                    "Кръг"
-                ],
+                publisher: "Кръг",
                 title: "Война и мир",
                 yearOfRelease: 2021
             }
